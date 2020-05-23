@@ -1,0 +1,4 @@
+baseURL = "https://runenielsen.com/"
+languageCode = "en-us"
+title = "Rune Nielsen | Freelance Developer"
+theme = "stronix"
