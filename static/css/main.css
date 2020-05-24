@@ -23,23 +23,12 @@ html, body {
     grid-area: main;
 }
 
-.main__headline {
-    font-size: 36px;
-    font-family: var(--headline-font); 
-    color: var(--headline-color);
-}
-
-.main__sub-headline {
-    font-size: 28px;
-    font-family: var(--headline-font); 
-    color: var(--headline-color);
-}
-
 .post {
-    padding: 20px 20px 20px 0px; 
+    padding: 20px;
     border: 3px dashed white;
     margin-bottom: 10px;
     border-bottom: 3px solid var(--secondary-bg-color);
+    text-align: center;
 }
 
 .post:hover {
@@ -74,7 +63,9 @@ html, body {
     display: flex;
     padding: 20px 0px;
     margin-bottom: 10px;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
 }
 
 .header-collection {
@@ -90,11 +81,11 @@ html, body {
 .header-item__title {
     font-size: 24px; 
     font-weight: 600;
-    padding: 0;
+    padding: 15px;
 }
 
 .header-item__icon {
-    font-size: 30px; 
+    font-size: 40px; 
     padding: 5px;
 }
 
@@ -179,4 +170,8 @@ ol, ul {
 
 li {
     padding: 5px;
+}
+
+@media only screen and (min-width: 1200px) {
+
 }
