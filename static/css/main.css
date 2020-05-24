@@ -1,9 +1,10 @@
 :root {
-    --main-bg-color: #f4f6f7;
-    --headline-color: #295972;
-    --headline-light-color: #397A9D;
-    --headline-font: 'Oswald', sans-serif;
-    --default-font: 'Open Sans', sans-serif;
+    --main-bg-color: white;
+    --secondary-bg-color: rgba(128,128,128, .12);
+    --headline-color: black;
+    --headline-light-color: black;
+    --headline-font: 'Jura', sans-serif;
+    --default-font: 'Jura', sans-serif;
 }
 
 *, *:before, *:after {
@@ -34,14 +35,52 @@ html, body {
     color: var(--headline-color);
 }
 
+.post {
+    padding: 20px; 
+    border-bottom: 1px solid var(--secondary-bg-color);
+}
+
+.post:hover {
+    background-color: var(--secondary-bg-color);
+}
+
+.post__link {
+    color: var(--headline-light-color);
+    text-decoration: none;
+}
+
+.post__title {
+    font-size: 30px; 
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.post__description {
+    font-size: 20px; 
+}
+
+.post__date {
+    font-size: 16px;
+    padding: 10px;
+}
+
 .header {
     grid-area: header;
     display: flex;
     color: var(--headline-color);
+    border-bottom: 3px solid black;
+    display: flex;
+    padding: 20px 0px;
+    margin-bottom: 10px;
 }
 
 .header-item {
     flex: 1; 
+}
+
+.header-item__title {
+    font-size: 30px; 
+    font-weight: 600;
 }
 
 .header-item__title {
