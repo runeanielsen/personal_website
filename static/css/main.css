@@ -36,12 +36,14 @@ html, body {
 }
 
 .post {
-    padding: 20px; 
-    border-bottom: 1px solid var(--secondary-bg-color);
+    padding: 20px 20px 20px 0px; 
+    border: 3px dashed white;
+    margin-bottom: 10px;
+    border-bottom: 3px solid var(--secondary-bg-color);
 }
 
 .post:hover {
-    background-color: var(--secondary-bg-color);
+    border-bottom: 3px solid  black;
 }
 
 .post__link {
@@ -61,7 +63,7 @@ html, body {
 
 .post__date {
     font-size: 16px;
-    padding: 10px;
+    padding: 20px 20px 20px 0px;
 }
 
 .header {
@@ -79,26 +81,79 @@ html, body {
 }
 
 .header-item__title {
-    font-size: 30px; 
+    font-size: 24px; 
     font-weight: 600;
 }
 
-.header-item__title {
-   
+.header-item__title-link {
+    color: var(--headline-light-color);
+    text-decoration: none;   
 }
-
 
 .footer {
     grid-area: footer;
 }
 
 .grid-container {
-    width: 1024px;
     display: grid;
     grid-template-areas:
       'header'
       'main'
       'footer';
-    text-align: center;
+    width: 100%;
+    max-width: 1500px;
 }
 
+.blog-post {
+    line-height: 2;
+    overflow-x: auto;
+}
+
+.blog-post__title {
+    font-size: 46px;
+    padding: 0;
+}
+
+.blog-post__date {
+    font-size: 20px;
+    padding: 0;
+}
+
+.blog-post__content {
+    line-height: 1.5;
+    font-size: 20px; 
+}
+
+.highlight {
+}
+
+.highlight pre {
+    padding: 10px 20px;
+    margin: 15px 0px;
+    overflow-x: auto;
+}
+
+.highlight scroll {
+    overflow: scroll;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    padding: 15px 0px 5px 0px; 
+}
+
+h1 {
+    font-size: 36px; 
+}
+
+h2 {
+    font-size: 32px;
+}
+
+h3 {
+    font-size: 30px;
+}
+
+h4 {
+    font-size: 26px;
+}

@@ -1,13 +1,13 @@
 {{ define "main" }}
 <main class="main">
     {{ range .Paginator.Pages }}
-    <article class="post">
         <a class="post__link" href="{{ .Permalink }}">
-            <h2 class="post__title">{{ .Title }}</h2>
-            <p class="post__description">{{ .Description }}</p> 
-            <p class="post__date">{{ .Date.Format "Mon, Jan 2, 2006" }}</p>
+            <article class="post">
+                <h2 class="post__title">{{ .Title }}</h2>
+                <p class="post__description">{{ .Description }}</p> 
+                <p class="post__date">{{ .Date.Format "Mon, Jan 2, 2006" }}</p>
+            </article>
         </a>
-    </article>
     {{ end }} 
 </main>
 {{ end }}
