@@ -1,3 +1,65 @@
-body {
-    background-color: blue;
+:root {
+    --main-bg-color: #f4f6f7;
+    --headline-color: #295972;
+    --headline-light-color: #397A9D;
+    --headline-font: 'Oswald', sans-serif;
+    --default-font: 'Open Sans', sans-serif;
 }
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: var(--default-font);
+    background-color: var(--main-bg-color);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.main {
+    grid-area: main;
+}
+
+.main__headline {
+    font-size: 36px;
+    font-family: var(--headline-font); 
+    color: var(--headline-color);
+}
+
+.main__sub-headline {
+    font-size: 28px;
+    font-family: var(--headline-font); 
+    color: var(--headline-color);
+}
+
+.header {
+    grid-area: header;
+    display: flex;
+    color: var(--headline-color);
+}
+
+.header-item {
+    flex: 1; 
+}
+
+.header-item__title {
+   
+}
+
+
+.footer {
+    grid-area: footer;
+}
+
+.grid-container {
+    width: 1024px;
+    display: grid;
+    grid-template-areas:
+      'header'
+      'main'
+      'footer';
+    text-align: center;
+}
+

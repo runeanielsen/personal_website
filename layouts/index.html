@@ -1,5 +1,13 @@
 {{ define "main" }}
-<main>
-   <h1>Main</h1>  
+<main class="main">
+    <h1 class="main__headline">{{ .Title }}</h1>  
+
+    <h2 class="main__sub-headline">Posts</h2>
+    {{ range .Paginator.Pages }}
+    <article>
+        <h2>{{ .Title }}</h2>
+        {{ .Description }}
+    </article>
+    {{ end }} 
 </main>
 {{ end }}
