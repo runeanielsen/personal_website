@@ -1,3 +1,8 @@
 baseURL = "https://runenielsen.com/"
 languageCode = "en-us"
-websiteTitle = "Rune Nielsen | Freelance Software Developer"
+title = "Rune Nielsen | Freelance Software Developer"
+
+[params]
+    github = "https://github.com/runeanielsen"
+    linkedin = "https://linkedin.com/in/runeanielsen"
+    twitter = "https://twitter.com/runeanielsen"

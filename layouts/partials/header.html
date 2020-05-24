@@ -1,7 +1,32 @@
 <header class="header">
-    <div class="header-item">
-        <a class="header-item__title-link" href="/">
-            <h1 class="header-item__title">Rune Nielsen | Freelance software developer</h1>
-        </a>
-    </div> 
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" href="/">
+                <h1 class="header-item__title">{{ .Site.Title }}</h1>
+            </a>
+        </div>     
+    </div>
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="{{ .Site.Params.github }}">
+                <p class="header-item__icon">
+                    <i class="fab fa-github-square"></i>
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="{{ .Site.Params.twitter }}">
+                <p class="header-item__icon">
+                    <i class="fab fa-twitter-square"></i> 
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="{{ .Site.Params.linkedin }}">
+                <p class="header-item__icon">
+                    <i class="fab fa-linkedin"></i>
+                </p> 
+            </a>
+        </div>    
+    </div>
 </header>

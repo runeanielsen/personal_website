@@ -74,18 +74,31 @@ html, body {
     display: flex;
     padding: 20px 0px;
     margin-bottom: 10px;
+    justify-content: space-between;
+}
+
+.header-collection {
+    display: flex;
 }
 
 .header-item {
     flex: 1; 
+    align-items: center;
+    display: flex;
 }
 
 .header-item__title {
     font-size: 24px; 
     font-weight: 600;
+    padding: 0;
 }
 
-.header-item__title-link {
+.header-item__icon {
+    font-size: 30px; 
+    padding: 5px;
+}
+
+.header-item__link {
     color: var(--headline-light-color);
     text-decoration: none;   
 }
