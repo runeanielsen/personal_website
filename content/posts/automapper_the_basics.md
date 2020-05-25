@@ -17,8 +17,7 @@ Another reason to create a view model or data transfer object is that you don't 
 
 In the code below I will show a creation of a view model. The example matches the creation of a data transfer object as well.
 
-
-Example of simple customer model
+#### Example of simple customer model
 
 ```C#
 public class Customer
@@ -43,9 +42,9 @@ As you can see in the code above, we only want to expose the “firstname” and
 
 To map this the normal way without AutoMapper, we manually have to assign each property from the view model to the domain model. This is a pretty quick task when dealing with a low amount of properties, but when the number of properties gets high, the mapping becomes a very time-consuming task, and the same mappings will occur in many places. To solve this problem we can use AutoMapper.
 
-An example of manual mapping.  
+#### An example of manual mapping.  
 
-```
+```C#
 var customer = new Customer
 {
     Firstname = vm.Firstname,
