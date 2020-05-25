@@ -118,6 +118,10 @@ html, body {
     padding: 10px 0;
 }
 
+.blog-post img {
+    max-width: 100%;
+}
+
 .blog-post__title {
     font-size: 46px;
     margin-bottom: 10px;
