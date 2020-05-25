@@ -30,15 +30,10 @@ This will greatly help us when it comes to creating mocking objects for unit tes
 There are currently a lot of IoC container frameworks available for use. I am mainly a .NET developer, so I will introduce you to a few that are available for the .NET platform.
 
 * Unity
-
 * Is an IoC container developed and maintained by Microsoft
-
 * Autofac
-
 * Open source IoC container framework
-
 * Ninject
-
 * Open source IoC container framework
 
 Overall it doesn’t matter which framework you pick, they all do pretty much the same thing. The reason to pick one over the other would be because you like one of the frameworks syntax better than the others.
