@@ -114,6 +114,10 @@ html, body {
     padding: 20px;
 }
 
+.blog-post p {
+    padding: 10px 0;
+}
+
 .blog-post__title {
     font-size: 46px;
     margin-bottom: 10px;
