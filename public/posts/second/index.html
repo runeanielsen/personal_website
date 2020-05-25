@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="/css/reset.css" type="text/css" />
+	<link rel="stylesheet" href="/css/main.css" type="text/css" />
+	<script src="https://kit.fontawesome.com/0d71694d01.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="grid-container">
+		<header class="header">
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" href="/">
+                <h1 class="header-item__title">Rune Nielsen | Freelance Software Developer</h1>
+            </a>
+        </div>     
+    </div>
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://github.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-github-square"></i>
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://twitter.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-twitter-square"></i> 
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://linkedin.com/in/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-linkedin"></i>
+                </p> 
+            </a>
+        </div>    
+    </div>
+</header>
+
+		
+<div class="blog-post">
+    <h1 class="blog-post__title">Kubernetes</h1>
+    <h2 class="blog-post__date">Sat, May 23, 2020</h2>
+    <div class="blog-post__content">
+        <h1 id="kubernetes">Kubernetes</h1>
+<p>Kubernetes is a software system that allows you to easily deploy and manage containerized applications on top of it. It relies on the features of Linux containers to run heterogenerous applications.</p>
+<p>Deploying applications through Kubernetes is always the same, whether your cluster contains only a couple of nodes or thousands of them.</p>
+<p>Kubernetes is composed of a master node and any number of worker nodes. When the developer submits a list of apps to the master node, Kubernetes deploys them to the cluster of worker nodes.</p>
+<p>The developer can specify that certain apps must run together and Kubernetes will deploy them on the same worker node.</p>
+<p>Kubernetes can be thought of as an operating system for the cluster. It relieves application developers from having to implement certain infrastructure-related services into their apps; Kubernetes provides discovery, scaling, load-balancing, self-healing and leader election.</p>
+<p>Kubernetes will run your containerized app somewhere in the cluster, provide information to its components on how to find each other, and keep all of them running.</p>
+<h2 id="two-types-of-nodes">Two types of nodes</h2>
+<p>A kubernetes cluster is composed of two types of nodes.</p>
+<ul>
+<li>
+<p>The master node, which hosts the Kubernetes Control Plane and controls and manages the whole Kubernetes system.</p>
+</li>
+<li>
+<p>Worker nodes that run the actual applications you deploy.</p>
+</li>
+</ul>
+<h2 id="the-control-plane">The control plane</h2>
+<p>The control plane is what controls the cluster and makes it function. It consists of multiple components that can run on a single master node or be split across multiple nodes and replicated to ensure high availability.</p>
+<ul>
+<li>
+<p>The Kubernetes API server, which you and the other Control Plane components communicate with</p>
+</li>
+<li>
+<p>The Scheduler, which schedules your apps (assigns a worker node to each deployable component of your application)</p>
+</li>
+<li>
+<p>The controller manager, which performs cluster-level functions, such as replicating components, keeping track of worker nodes, handling node failures and so on.</p>
+</li>
+<li>
+<p>etcd, a reliable distributed data store that persistently stores the cluster configuration.</p>
+</li>
+</ul>
+<h2 id="the-nodes">The Nodes</h2>
+<p>The worker nodes are the machines that run your containerized applications. The task of running , monitoring, and providing services to your applications is done by the following components:</p>
+<ul>
+<li>
+<p>Docker, rkt, or another container runtime, which runs your containers.</p>
+</li>
+<li>
+<p>The Kubelet, which talks to the API server and manages containers on its node.</p>
+</li>
+<li>
+<p>The Kubernetes Service Proxy (kube-proxy), which load-balances network traffic between application components.</p>
+</li>
+</ul>
+<h2 id="running-an-application">Running an application</h2>
+<p>To run an application in Kubernetes you need to package it up into one or more container images, push those images to an image registry, and then post a description of your app to the Kubernetes API server.</p>
+<p>The description includes</p>
+<ul>
+<li>
+<p>Container image or images that contain your application components.</p>
+</li>
+<li>
+<p>How those components are related to each other.</p>
+</li>
+<li>
+<p>Which ones need to run on the same nodes and which don&rsquo;t.</p>
+</li>
+<li>
+<p>For each component, you can specify how many replicas you want to run. Additionally, the description also includes which of those components provide a service to either internal or external client and should be exposed through a single IP address and made discoverable to the other components.</p>
+</li>
+<li>
+<p>Which components that should provide a service to internal or external clients and should be exposed through a single IP address and made discoverable to other components.</p>
+</li>
+</ul>
+<h2 id="description">Description</h2>
+<p>The workflow applying a description.</p>
+<ol>
+<li>
+<p>The API server processes your app&rsquo;s description, the Scheduler schedules the specificed groups of containers onto the available worker nodes based on the computational requirements of each group and the unallocated resources on each node at the time.</p>
+</li>
+<li>
+<p>The Kubelet on those nodes instructs the Container Runtime to pull the required container images and run the containers.</p>
+</li>
+</ol>
+<p>Once the application is running, Kubernetes makes sure that the deployed state of the application always matches the description you provided. So if a node goes down then Kubernetes will redistribute the workload out to the existing nodes.</p>
+<h2 id="scaling">Scaling</h2>
+<p>Kubernetes allows increasing and decreasing the number of copies, and Kubernetes will spin up additional ones or stop the excess ones. It is possible to give the job of optimizing the amount of replicas based on metrics such as CPU load and memory etc.</p>
+<h2 id="load-balancing">Load balancing</h2>
+<p>To allow clients to find containers that provide a specific service, you tell Kubernetes which containers provide the same service and Kubernetes will expose them all though a single static IP. The kube-proxy will make sure connections to the service are load balanced across all the containers that provide the service.</p>
+<p>The IP address of the service is always constant, even if nodes go down.</p>
+<h2 id="pods">Pods</h2>
+<p>Kubernetes do not deal with individual containers directly. Instead, it uses the concept of multiple co-located containers. The collection of containers is called a Pod.</p>
+<p>A pod is a group of one or more tightly related containers that will always run together on the same worker node and in the same Linux namespace(s). Each pod is like a seperate logical machine with its own IP, hostname, processes, and so, running a single application.</p>
+<p>All the containers in a pod will appear to be running on the same logical machine, whereas containers in other pods, even if they&rsquo;re running on the same worker node, will appear to be running on a different one.</p>
+<h3 id="access-the-pod">Access the Pod</h3>
+<p>To access a pod from the outside a service object is used. A service of type LoadBalancer is used to expose the Pod to external clients otherwise by using a CluserIp service it can only be accessed from inside the cluster. By creating a LoadBalancer type service, an external load balancer will be created and you can connect to the pod through the load balancers public ip.</p>
+<h3 id="pod-network">Pod Network</h3>
+<p>All pods in a Kubernetes cluster reside in a single flat, shared, network-address space, which means every pod can access every other pod at the other pod&rsquo;s IP address. No network address translation gateways exist between them. When two pods send network packets between each other, they&rsquo;ll each see the actual IP address of the other as the source IP in the packet.</p>
+<p>This means that communication between pods is always simple. The communication is much like computers on a LAN. Like a computer on a LAN, each pod gets its own IP address and is accessible from all other pods through this network established specifically for pods.</p>
+<h4 id="port-forward-pod-to-local-network">Port forward pod to local network</h4>
+<p>In case of debugging or other reasons you can port-forward a pod to the local machine network using the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl port-forward $podname $portnumber:$portnumber 
+</code></pre></div><h3 id="pod-definition">Pod Definition</h3>
+<p>The pod definition consists of a few parts. First, there&rsquo;s the Kubernetes API version used in the YAML and the type of resource the YAML is describing. Then, three important sections are found in almost all Kubernetes resources:</p>
+<ul>
+<li>Metadata includes the name, namespace, labels, and other information about the pod.</li>
+<li>Spec contains the actual description of the pod&rsquo;s contents, such as the pod&rsquo;s containers, volumes, and other data.</li>
+<li>Status contains the current information about the running pod, such as what condition the pod is in, the description and status of each container, and the pod&rsquo;s internal IP and other basic info.</li>
+</ul>
+<p>Specifying ports in the pod defition is purely informational. Ommiting them has no effect on whether clients can connect to the pod through the port or not. If the container is accepting connections through a port bound to the 0.0.0.0 address, other pods can always connect to it, even if the port isn&rsquo;t listed in the pod spec explicitly.</p>
+<p>Example of a simple Pod definition</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Pod
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia-manual
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">containers</span>:
+  - <span style="color:#66d9ef">image</span>: runeanielsen/kubia
+    <span style="color:#66d9ef">name</span>: kubia
+    <span style="color:#66d9ef">ports</span>:
+    - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">8080</span>
+      <span style="color:#66d9ef">protocol</span>: TCP
+</code></pre></div><h2 id="labels">Labels</h2>
+<p>Labels are a Kubernetes feature to organize not only pods but all Kubernetes resources. A label is a key-value pair you attach to a resource, which is then used for label selectors. A resource can have multiple labels, as long as the keys of those labels are unique. It is possible to add and modify labels on an existing resource without having to recreate that resource.</p>
+<p>Example of a pod definition with two labels: &lsquo;creation_mode: manual&rsquo;, &lsquo;env: prod&rsquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Pod
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia-manual
+  <span style="color:#66d9ef">labels</span>:
+    <span style="color:#66d9ef">creation_method</span>: manual
+    <span style="color:#66d9ef">env</span>: prod
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">containers</span>:
+  - <span style="color:#66d9ef">image</span>: runeanielsen/kubia
+    <span style="color:#66d9ef">name</span>: kubia
+    <span style="color:#66d9ef">ports</span>:
+    - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">8080</span>
+      <span style="color:#66d9ef">protocol</span>: TCP
+</code></pre></div><p>To get containers on labels with specific labels the following command can be used, showing how to receive all pods with label creation_method : env.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl get po -L cration_method,env
+</code></pre></div><h2 id="annotations">Annotations</h2>
+<p>Kubernetes resources can contain annotations. A annotation is a key-value pair, they&rsquo;re similar to labels, but aren&rsquo;t meant to hold identifying information. A annoation cannot be used to group resources but it is used for holding much bigger information and that information is maent to be used by tools. Certain annotations are automatically added to Kubernetes resources. A great use of annotations are to add descriptions for pods and other resources.</p>
+<p>Example of adding a annotation to a pod.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl annotate pod kubia-manual mycompany.com/someannotation<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;foo bar&#34;</span>
+</code></pre></div><h2 id="namespaces">Namespaces</h2>
+<p>Namespaces allow you to split complex systems with numerous components into smaller distinct groups. They can also be used to seperate resources in a multi-tenant environment. A common use-case for namespaces are to split resources up into production, staging and development.</p>
+<p>Resource names do only need to be unique within the namespaces - this allows multiple resources to have the same name as long as they&rsquo;re in seperate namespaces. Namespaces do not provide network isolation by default, this means that pods accross different namespaces can talk to each other.</p>
+<p>Not all resource types are seperated across namespaces, one of them is the node resource type that is global and is not tied to a single namespace.</p>
+<p>To get resources in a specific namespace, in this example the filtered namespace is &lsquo;kube-system&rsquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl get po -n kube-system
+</code></pre></div><p>Example of creating a namespace definition in yaml.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Namespace
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: custom-namespace
+</code></pre></div><p>To create a resource in the namespace you&rsquo;ve created you can either add a metadata tag called &lsquo;namespace&rsquo; in the definition file or set it doing the resource creation.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl create -f resource-definition.yaml -n custom-namespace
+</code></pre></div><p>When having multiple namespaces you&rsquo;re required to use the &lsquo;-n&rsquo; flag to manage resources in different namespaces. To quickly switch between namespaces create an alias like this to switch between contexts, you can then switch context by using &lsquo;kcd &ndash;namespace some-namespace&rsquo;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">alias kcd<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;kubectl config set-context $(kubectl config current-context) --namespace&#39;</span>
+</code></pre></div><p>By deleting a namespace all resources in that namespace will also be deleted.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl delete ns custom-namespace
+</code></pre></div><h2 id="replication-controller--deployments">Replication Controller &amp; Deployments</h2>
+<p>In the real world you almost never deploy pods directly. Instead you create resources of type Replication Controller and Deployment to handle the pods. The reason for this is that if a node dies and for example a pod is created directly, then the pod wont get restarted but if it is managed by a replication controller the pod will be spun up on another available node.</p>
+<h3 id="liveness-probe">Liveness Probe</h3>
+<p>Kubernetes checks if a pod is alive by using a liveness probe for each container in the pods specification. Kubernetes will periodically run the probe and restart the probe if the probe fails.</p>
+<p>Kubernetes can probe a container using one of the three mechanisms:</p>
+<ul>
+<li>
+<p>An HTTP GET probe performs an HTTP GET request on the containers IP address, a port and path you specify. If the response does not represent an HTTP error the probe is considered successful.</p>
+</li>
+<li>
+<p>A TCP Socket probe tries to open a TCP connection to the specified port of the container. If the connection is established successfully, the probe is successful.</p>
+</li>
+<li>
+<p>An Exec probe executes an arbitrary command inside the container and checks the commands exit status code. If the status code is 0, the probe is successful.</p>
+</li>
+</ul>
+<p>Adding a liveness probe to a pod</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Pod
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia-liveness
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">containers</span>:
+  -  <span style="color:#66d9ef">image</span>: runeanielsen/kubia
+  <span style="color:#66d9ef">name</span>: kubia
+  <span style="color:#66d9ef">livenessProbe</span>:
+    <span style="color:#66d9ef">httpGet</span>:
+      <span style="color:#66d9ef">path</span>: /
+      <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">8080</span>
+</code></pre></div><p>For pods running in production you should always define a liveness probe. Without one, Kubernetes has no way of knowing whether your app is still alive or not. As long as the process is still running, Kubernetes will consider the container to be healthy.</p>
+<h3 id="replication-controller">Replication Controller</h3>
+<p>A ReplicationController is a Kubernetes resourcae that ensures itsa pods are always kept running. If the pod goes down for any reason, such as in the event of a node disappearing from the cluster or because the pod was evicted from the node, the ReplicationController notices the missing pod and creates a replacement pod.</p>
+<p>A ReplicationController monitors the list of running pods and makes sure the actual number of pods of a &ldquo;type&rdquo; always matches the declared number. ReplicationControllers opertes on sets of pods that match a certain label selector.</p>
+<p>A ReplicationController has three esential partsas:</p>
+<ul>
+<li>
+<p>A label selector, which determines what pods are in the ReplicationControllers scope</p>
+</li>
+<li>
+<p>A replica count, which specifies the desired number of pods that should be running</p>
+</li>
+<li>
+<p>A pod template, which is used when creating new pod replicas</p>
+</li>
+</ul>
+<p>All of the above can be modified at any time, but only changes to the replica count affect existing pods.</p>
+<p>Example of a ReplicationController definition file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: ReplicationController
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: kubia
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: kubia
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: kubia
+        <span style="color:#66d9ef">image</span>: runeanielsen/kubia
+        <span style="color:#66d9ef">ports</span>:
+        - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">8080</span>
+</code></pre></div><p>To scale an Replication Controller the following command can be used</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl scale rc kubia --replicas<span style="color:#f92672">=</span><span style="color:#ae81ff">20</span>
+</code></pre></div><p>It is also possible to increase the amount of replicas by editing the Replication Controller using the &lsquo;edit&rsquo; command and increase the replicas in the file.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl edit rc kubia
+</code></pre></div><p>Anoter way is to increase the replication amount in the yaml file and apply the changes.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl apply -f my-rc.yaml
+</code></pre></div><h4 id="deleting-a-replication-controller">Deleting a Replication Controller</h4>
+<p>When you delete a Replication Controller through &lsquo;kubectl delete&rsquo;, the pods are also deleted. But because pods are created by a Replication Controller aren&rsquo;t an integral part of the ReplicationController, and are only managed by it, you can delete only the Replication Controller and leave the pods running.</p>
+<p>This can be done by using the &lsquo;cascade&rsquo; flag and setting it to false.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl delete rc kubia --cascade<span style="color:#f92672">=</span>false
+</code></pre></div><h2 id="replicasets">ReplicaSets</h2>
+<p>In the beginning ReplicationController were the only Kubernetes component for replicating pods and rescheduling them when nodes failed. Later, ReplicaSet was introduced. It&rsquo;s a new generation of ReplicationController and replaces it completely (ReplicationController will eventually be deprecated). ReplicaSets are almost identical to ReplicationControllers.</p>
+<p>You usually won&rsquo;t create ReplicaSets directly, but instead have them created automatically when you create the higher-level Deployment resource.</p>
+<h3 id="replicasets-vs-replicationcontroller">ReplicaSets vs ReplicationController</h3>
+<p>A ReplicaSet behaves exactly like a ReplicationController, but it has more expressive pod selectors. Where as a ReplicationController&rsquo;s label selector only allows matching pods that includes a certain label, a ReplicaSet&rsquo;s selector also allows matching pods that lack a certain label or pods that include a certain label key, regardless of its value.</p>
+<p>A ReplicationController can&rsquo;t match pods with two different key values as the same time. But a single ReplicaSet can match both at the same time and treat them a single group.</p>
+<p>Example of a ReplicaSet.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: ReplicaSet
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia
+<span style="color:#66d9ef">spec</span>: 
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchLabels</span>:
+      <span style="color:#66d9ef">app</span>: kubia
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: kubia
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: kubia
+        <span style="color:#66d9ef">image</span>: runeanielsen/kubia
+</code></pre></div><p>The main improvements of ReplicaSets over ReplicaitonControllers are their more expressive label selectors. You can either use the simple &lsquo;matchLabels&rsquo; selector or use the more expressive &lsquo;matchExpressions&rsquo; selector.</p>
+<p>Example of ReplicaSet using &lsquo;matchExpressions&rsquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: ReplicaSet
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia
+<span style="color:#66d9ef">spec</span>: 
+  <span style="color:#66d9ef">replicas</span>: <span style="color:#ae81ff">3</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchExpressions</span>:
+      - <span style="color:#66d9ef">key</span>: app
+        <span style="color:#66d9ef">operator</span>: In
+        <span style="color:#66d9ef">values</span>:
+          - kubia
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: kubia
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: kubia
+        <span style="color:#66d9ef">image</span>: runeanielsen/kubia
+</code></pre></div><p>The &lsquo;matchExpressions&rsquo; can contain the following four operators:</p>
+<ul>
+<li>
+<p>In - Labels value mustmatch one of the specified values.</p>
+</li>
+<li>
+<p>NotIn - Labels value must not match any of the specified values.</p>
+</li>
+<li>
+<p>Exists - Pod must include a label with the specified key (the value isn&rsquo;t important). When using this operator, you shouldn&rsquo;t specify the &lsquo;values&rsquo; field.</p>
+</li>
+<li>
+<p>DoesNotExist - Pod must not include a label with the specified key. The &lsquo;values&rsquo; property must not be specified.</p>
+</li>
+</ul>
+<p>If you specify multiple expressions, all those expressions must evaluate to true for the selector to match a pod.</p>
+<h2 id="daemonset">DaemonSet</h2>
+<p>DaemonSet object is much like a ReplicationController or ReplicaSet, expect that pods created by a DaemonSet already have a target node specified and skip the Kubernetes Scheduler. They aren&rsquo;t scattered around the cluster randomly. A DaemonSet makes sure it creates as many pods as there are nodes and deploys each one on its own node. Whereas a ReplicaSet or ReplicationController makes sure that a desired number of pods replicas exist in the cluster, a DaemonSet does not have any notion of a desired replica count it just makes sure that a pod matching its pod selector is running on each node.</p>
+<p>DaemonSet automatically deploys a new pod instance when a new node is added to the cluster.</p>
+<p>DaemonSet deploys pods to all nodes in the cluster by default, unless you specify that the pods should only run on a subset of all the nodes. To do this the &lsquo;nodeSelector&rsquo; is used.</p>
+<p>Example of a DaemonSet that is only deployed on nodes with SSD disks.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: apps/v1
+<span style="color:#66d9ef">kind</span>: DaemonSet
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: ssd-monitor
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">matchLabels</span>:
+      <span style="color:#66d9ef">app</span>: ssd-monitor
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: ssd-monitor
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">nodeSelector</span>:
+        <span style="color:#66d9ef">disk</span>: ssd
+      <span style="color:#66d9ef">containers</span>:
+    - <span style="color:#66d9ef">name</span>: main
+      <span style="color:#66d9ef">image</span>: runeanielsen/ssd-monitor
+</code></pre></div><h2 id="job-resource">Job resource</h2>
+<p>Kubernetes includes support for not continious tasks using the &lsquo;Job&rsquo; resource. The &lsquo;Job&rsquo; resources allows you to run a pod whose container isn&rsquo;t restarted when the process running inside finishes successfully.</p>
+<p>In the case of a node failure, the pods on that node that are managed by a Job will be rescheduled to other nodes the way ReplicaSet pods are.</p>
+<p>Jobs are useful for ad hoc tasks, where its crucial that the task finishes properly. You could run the task in an unmanaged pod and for it to finish, but in the event of a node failing or the pod being evicted from the node while it is performing its task, you&rsquo;d need to manually recreate it.</p>
+<p>Example of a Job definition</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: batch/v1
+<span style="color:#66d9ef">kind</span>: Job
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: batch-job
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: batch-job
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">restartPolicy</span>: OnFailure
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: main
+        <span style="color:#66d9ef">image</span>: runeanielsen/batch-job
+</code></pre></div><h3 id="jobs-in-parallel">Jobs in parallel</h3>
+<p>Jobs may be configured to create more than one pod intance and run them in parallel or sequentially. This is done by setting the completions and parallelism properties in the Job spec.</p>
+<p>If you need the Job to run more than once, you can set the completions to the amount of times that you want the Job&rsquo;s pod to run.</p>
+<p>This example will run five pods one after the other.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: batch/v1
+<span style="color:#66d9ef">kind</span>: Job
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: multi-completion-batch-job
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">completions</span>: <span style="color:#ae81ff">5</span>
+<span style="color:#66d9ef">template</span>:
+    <span style="color:#66d9ef">metadata</span>:
+      <span style="color:#66d9ef">labels</span>:
+        <span style="color:#66d9ef">app</span>: batch-job
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">restartPolicy</span>: OnFailure
+      <span style="color:#66d9ef">containers</span>:
+      - <span style="color:#66d9ef">name</span>: main
+        <span style="color:#66d9ef">image</span>: runeanielsen/batch-job
+</code></pre></div><h3 id="cron-jobs">Cron Jobs</h3>
+<p>When a job needs to be run at a specific time &lsquo;Cron Jobs&rsquo; are used.</p>
+<p>Example of a CronJob</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: batch/v1
+<span style="color:#66d9ef">kind</span>: CronJob
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: batch-job-every-fifteen-minutes
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">schedule</span>: <span style="color:#e6db74">&#34;0,15,30,45 * * * *&#34;</span>
+  <span style="color:#66d9ef">jobTemplate</span>:
+    <span style="color:#66d9ef">spec</span>:
+      <span style="color:#66d9ef">template</span>:
+        <span style="color:#66d9ef">metadata</span>:
+          <span style="color:#66d9ef">labels</span>:
+            <span style="color:#66d9ef">app</span>: periodic-batch-job
+        <span style="color:#66d9ef">spec</span>:
+          <span style="color:#66d9ef">restartPolicy</span>: OnFailure
+          <span style="color:#66d9ef">containers</span>:
+          - <span style="color:#66d9ef">name</span>: main
+            <span style="color:#66d9ef">image</span>: runeanielsen/batch-job
+</code></pre></div><h2 id="services">Services</h2>
+<p>A Kubernetes Service is a resource you create to make a single, contant point of entry to a group of pods providing the same service. Each service has an IP address and port that never change while the service exists. Clients can then open a connection to that IP and port, that connection is then routed to one of the pods backing that service. This way, clients of a service don&rsquo;t need to know the location of individual pods providing the service, allowing those pods to be moved around the cluster at any time.</p>
+<p>Example of a service definition. The example only exposes the group of pods to other pods in the cluster.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">apiVersion
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
+    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">8080</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: kubia
+</code></pre></div><p>You can send request to your service from within the cluster in a few ways:</p>
+<ul>
+<li>
+<p>The obvious way is to create a pod that will send the request to the service&rsquo;s cluster IP and log the response. You can then examine the pod&rsquo;s log to see what the service&rsquo;s response was.</p>
+</li>
+<li>
+<p>You can ssh into one of the Kubernetes nodes and use the curl command.</p>
+</li>
+<li>
+<p>You can execute the curl command inside one of your existing pods through the kubectl exec command.</p>
+</li>
+</ul>
+<p>Example of kubectl exec command</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl exec pod-name -- curl -s http://pod-ip
+</code></pre></div><p>If you want all requests made by a certain client to be redirected to the same pod every time, you can set the service&rsquo;s &lsquo;sessionAffinity&rsquo; property to &lsquo;ClientIp&rsquo; (instread of &lsquo;Node&rsquo;, which is the default).</p>
+<h3 id="multiple-ports">Multiple ports</h3>
+<p>Services can also support multiple ports. Example could be two different ports one for HTTP and one for HTTPS.</p>
+<p>Example</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">name</span>: http
+    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
+    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">8080</span>
+  - <span style="color:#66d9ef">name</span>: https
+    <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">443</span>
+    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">8443</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: kubia
+</code></pre></div><h3 id="discovering-services-through-environment-variables">Discovering services through environment variables</h3>
+<p>When a pod is started, Kubernetes initializes a set of environment variables pointing to each service taht exists at the moment. If you create the service before creating the client pods, processes in those pods can get the IP address and port of the serivce by inspecting their environment variables.</p>
+<p>An example of a environment variable for the Kubia service &lsquo;KUBIA_SERVICE_HOST&rsquo;, &lsquo;KUBIA_SERVICE.PORT&rsquo;.</p>
+<h3 id="exposing-services-to-the-outside">Exposing services to the outside</h3>
+<p>To create a service with manually managed endpoints, you need to create both a Service and an Endpoint resource.</p>
+<h4 id="creating-a-service-without-a-selector">Creating a service without a selector</h4>
+<p>This example defines a service called &lsquo;external-service&rsquo; that will accept incomming connections on port 80. Notice that a pod selector is not defined for this service.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: external-service
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
+
+</code></pre></div><h4 id="creating-an-endpoint-resource-for-a-service-without-a-selector">Creating an endpoint resource for a service without a selector</h4>
+<p>Endpoints are a seperate resource and not an attribute of a service. The following shows a definition for an endpoint.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Endpoints
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: external-service
+<span style="color:#66d9ef">subsets</span>:
+  - <span style="color:#66d9ef">addresses</span>:
+    - <span style="color:#66d9ef">ip</span>: <span style="color:#ae81ff">11.11.11.11</span>
+    - <span style="color:#66d9ef">ip</span>: <span style="color:#ae81ff">22.22.22.22</span>
+    <span style="color:#66d9ef">ports</span>:
+    - <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
+</code></pre></div><p>Instead of exposing an external service manually configuring the service&rsquo;s Endpoints, a simpler method allows you to refer to an external service by its fully qualified domain name (FQDN).</p>
+<p>To create a service that serves as an alias for an external service, you create a Service resource with the type field set to &lsquo;ExternalName&rsquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: external-service
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">type</span>: ExternalName
+  <span style="color:#66d9ef">externalName</span>: someapi.somecompany.com
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
+</code></pre></div><h3 id="exposing-services-to-external-clients">Exposing services to external clients</h3>
+<p>There is a few ways to make a service accessible externally:</p>
+<ul>
+<li>
+<p>Setting the service type to NodePort - For a NodePort service, each cluster node opens a port on the node itself and redirects traffic received on that port to the underlying service. The service isn&rsquo;t accessible only at the internal cluster IP and port, but also through a dedicated port on all nodes.</p>
+</li>
+<li>
+<p>Setting the service type to LoadBalancer, an extension of the NodePort type - This makes the service accessible through a dedicated load balancer, provisioned from the cloud infrastructure Kubernetes is running on. The load balancer redirects traffic to the nod eport across all nodes. Clients connect to the service through the load balancers IP.</p>
+</li>
+<li>
+<p>Creating an Ingress resource, a radically different mechanism for exposing multiple services through a single IP address - It operates at the HTTP level and can thus offer more features than layer 4 services can.</p>
+</li>
+</ul>
+<h4 id="using-a-nodeport-service">Using a NodePort Service</h4>
+<p>By creating a NodePort service, you make Kubernetes reserve a port on all its nodes (the same port number is used across all of them) and forward incoming connections to the pods that are part of the service. This is similar to a regular service(ClusterIp), but a NodePort service can be accessed not only through the service&rsquo;s internal cluster IP, but also through any node&rsquo;s IP and the reserved node port.</p>
+<p>Example of a NodePort definition.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia-nodeport
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">type</span>: NodePort
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
+    <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">8080</span>
+    <span style="color:#66d9ef">nodePort</span>: <span style="color:#ae81ff">30123</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: kubia
+</code></pre></div><h4 id="loadbalancer">Loadbalancer</h4>
+<p>If your Kubernetes cluster can provision a LoadBalancer this can be used to connect to the Nodes. The benefit of the LoadBalancer is that if you&rsquo;re using NodePort and the node you&rsquo;re connecting to goes down, then you won&rsquo;t be able to access the service. If you instead use a LoadBalancer then you can still access the services even if the node goes down.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Service
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: kubia-loadbalancer
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">type</span>: LoadBalancer
+  <span style="color:#66d9ef">ports</span>:
+  - <span style="color:#66d9ef">port</span>: <span style="color:#ae81ff">80</span>
+  <span style="color:#66d9ef">targetPort</span>: <span style="color:#ae81ff">8080</span>
+  <span style="color:#66d9ef">selector</span>:
+    <span style="color:#66d9ef">app</span>: kubia
+</code></pre></div><p>If your Kubernetes cluster cannot provision a LoadBalancer a NodePort will be used instead.</p>
+<h2 id="volumes">Volumes</h2>
+<p>Kubernetes volumes are a component of a pod and are thus defined in the pod&rsquo;s specification, much like containers. They aren&rsquo;t a standalone Kubernetes object and cannot be created or deleted on their own. A volume is available to all containers in the pod, but it must be mounted in each container that needs to access it. In each container, you can mount the volume in any location of the filesystem.</p>
+<p>A wide variety of volume types is available. Several are generic, while others are specific to the actual storage technologies.</p>
+<ul>
+<li>
+<p>emptyDir - A simple empty directory used for storing transient data.</p>
+</li>
+<li>
+<p>hostPath - Used for mounting directories from the workers node&rsquo;s filesystem into the pod.</p>
+</li>
+<li>
+<p>gitRepo - A volume initialized by checking out the contents of a Git repository.</p>
+</li>
+<li>
+<p>nfs - An NFS share mounted into the pod.</p>
+</li>
+<li>
+<p>gcePersistentDisk - (Google Compute Engine Persistent Disk), awsElastic-BlockStore, azureDisk - Used for mounting cloud provider-specific storage.</p>
+</li>
+<li>
+<p>cinder (* more) - Used for mounting other types of network storage.</p>
+</li>
+<li>
+<p>configMap, secret, downwardAPI - Special types of volumes used to expose certain Kubernetes resources and cluster information to the pod.</p>
+</li>
+<li>
+<p>persistentVolumeClaim - A way to use a pre- or dynamically provisioned persistent storage.</p>
+</li>
+</ul>
+<h3 id="emptydir">emptyDir</h3>
+<p>The simplest volume type is the emptyDir volume. As the name suggests, the volume starts out as an empty directory. The app inside the pod can then write any files it needs to it. Because the volumes lifetime is tied to that of the pod, the volumes contents are lost when the pod is deleted. An emptyDir volume is very useful for sharing files between containers running in the same pod.</p>
+<p>Example of a pod with two containers sharing the same volume.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Pod
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: fortune
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">containers</span>:
+  - <span style="color:#66d9ef">image</span>: runeanielsen/fortune
+    <span style="color:#66d9ef">name</span>: html-generator
+    <span style="color:#66d9ef">volumeMounts</span>:
+    - <span style="color:#66d9ef">name</span>: html
+      <span style="color:#66d9ef">mountPath</span>: /var/htdocs
+  - <span style="color:#66d9ef">image</span>: nginx:alpine
+    <span style="color:#66d9ef">name</span>: web-server
+    <span style="color:#66d9ef">volumeMounts</span>:
+    - <span style="color:#66d9ef">name</span>: html
+      <span style="color:#66d9ef">mountPath</span>: /usr/share/nginx/html
+      <span style="color:#66d9ef">readOnly</span>: <span style="color:#66d9ef">true</span>
+    <span style="color:#66d9ef">ports</span>:
+    - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">80</span>
+      <span style="color:#66d9ef">protocol</span>: TCP
+    <span style="color:#66d9ef">volumes</span>:
+    - <span style="color:#66d9ef">name</span>: html
+      <span style="color:#66d9ef">emptyDir</span>: {}
+</code></pre></div><h3 id="hostpath">hostPath</h3>
+<p>A hostPath volume points to a specific file or directory on the node&rsquo;s filesystem. Pods running on the same node and using the same path in their hostPath volume see the same files.</p>
+<p>hostPath is a persistent volume. hostPAth volumes are used if you need to read or write system files on the node. Never use them to persist data across pods.</p>
+<h3 id="persistentvolumes-and-persistentvolumeclaims">PersistentVolumes and PersistentVolumeClaims</h3>
+<p>The enable apps to request storage in a Kubernetes cluster without having to deal with infrastructure specifcs, two new resources were introduced. They are PersistentVolumes and PersistentVolumeClaims.</p>
+<p>Instead of the developer adding a technology-specific volume to their pod, it&rsquo;s the cluster administrator who sets up the underlying storage and then registers it in Kubernetes by creating a PersistentVolume resource through the Kubernetes API server. When creating the PersistentVolume, the admin specifies its size and access modes it supports.</p>
+<p>When a cluster user needs to use a persistent storage in one of their pods, they first create a PersistentVolumeClaim manifest, specifying the minimum size and the access mode they require. The User then submits the PersistentVolumeClaim manifest to the Kubernetes API server, and Kubernetes finds the appropriate PersistentVolume and binds the volume to the claim.</p>
+<p>Example of PersistentVolume using gcePersistentDisk</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: PersistentVolume
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: mongodb-pv
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">capacity</span>:
+    <span style="color:#66d9ef">storage</span>: 1Gi
+  <span style="color:#66d9ef">accessModes</span>:
+  - ReadWriteOnce
+  - ReadOnlyMany
+  <span style="color:#66d9ef">persistentVolumeReclaimPolicy</span>: Retain
+  <span style="color:#66d9ef">gcePersistentDisk</span>:
+    <span style="color:#66d9ef">pdName</span>: mongodb
+    <span style="color:#66d9ef">fsType</span>: ext4
+</code></pre></div><h3 id="persistentvolumeclaim">PersistentVolumeClaim</h3>
+<p>To use a PersistentVolume you need to claim it first. Claiming a PersistentVolumeClaim is a completely seperate process from creating a pod, because you want the same PersistentVolumeClaim to stay available even if the pod is rescheduled.</p>
+<p>Example of PersistentVolumeClaim</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: PersistentVolumeClaim
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: mongodb-pvc
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">resource</span>:
+    <span style="color:#66d9ef">requests</span>:
+      <span style="color:#66d9ef">storage</span>: 1Gi
+    <span style="color:#66d9ef">accessModes</span>:
+    - ReadWriteOnce
+    <span style="color:#66d9ef">storageClassName</span>: <span style="color:#e6db74">&#34;&#34;</span>
+</code></pre></div><h4 id="using-a-persistentvolumeclaim-in-a-pod">Using a PersistentVolumeClaim in a Pod</h4>
+<p>To use a PersistentVolumeClaim inside a pod, you need to reference it by name inside the pod&rsquo;s volume.</p>
+<p>Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">apiVersion</span>: v1
+<span style="color:#66d9ef">kind</span>: Pod
+<span style="color:#66d9ef">metadata</span>:
+  <span style="color:#66d9ef">name</span>: mongodb
+<span style="color:#66d9ef">spec</span>:
+  <span style="color:#66d9ef">containers</span>:
+  - <span style="color:#66d9ef">image</span>: mongo
+    <span style="color:#66d9ef">name</span>: mongodb
+    <span style="color:#66d9ef">volumeMounts</span>:
+    - <span style="color:#66d9ef">name</span>: mongodb
+      <span style="color:#66d9ef">mountPath</span>: /data/db
+    <span style="color:#66d9ef">ports</span>:
+    - <span style="color:#66d9ef">containerPort</span>: <span style="color:#ae81ff">27017</span>
+      <span style="color:#66d9ef">protocol</span>: TCP
+  <span style="color:#66d9ef">volumes</span>:
+  - <span style="color:#66d9ef">name</span>: mongodb-data
+    <span style="color:#66d9ef">persistentVolumeClaim</span>:
+      <span style="color:#66d9ef">claimName</span>: mongodb-pvc
+</code></pre></div><h2 id="thanks-to">Thanks to</h2>
+<ul>
+<li><a href="https://www.manning.com/books/kubernetes-in-action-second-edition?a_aid=kubiaML">Kubernetes in Action By Marko Luksa</a></li>
+<li><a href="https://www.pluralsight.com/courses/getting-started-kubernetes">Getting Started with Kubernetes By Nigel Poulton</a></li>
+</ul>
+   
+    </div>
+</div>
+
+		<footer class="footer">
+</footer>
+	
+	</div>
+</body>
+</html>

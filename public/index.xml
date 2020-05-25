@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rune Nielsen | Freelance Software Developer</title>
+    <link>https://runeanielsen.github.io/</link>
+    <description>Recent content on Rune Nielsen | Freelance Software Developer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 23 May 2020 16:26:19 +0200</lastBuildDate>
+    
+	<atom:link href="https://runeanielsen.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>https://runeanielsen.github.io/posts/second/</link>
+      <pubDate>Sat, 23 May 2020 16:26:19 +0200</pubDate>
+      
+      <guid>https://runeanielsen.github.io/posts/second/</guid>
+      <description>Kubernetes Kubernetes is a software system that allows you to easily deploy and manage containerized applications on top of it. It relies on the features of Linux containers to run heterogenerous applications.
+Deploying applications through Kubernetes is always the same, whether your cluster contains only a couple of nodes or thousands of them.
+Kubernetes is composed of a master node and any number of worker nodes. When the developer submits a list of apps to the master node, Kubernetes deploys them to the cluster of worker nodes.</description>
+    </item>
+    
+    <item>
+      <title>How to buy something awesome!</title>
+      <link>https://runeanielsen.github.io/posts/buy_something_awesome/</link>
+      <pubDate>Sat, 23 May 2020 16:25:58 +0200</pubDate>
+      
+      <guid>https://runeanielsen.github.io/posts/buy_something_awesome/</guid>
+      <description>In vel ligula tortor. Aliquam erat volutpat. Pellentesque at felis eu quam tincidunt dignissim. Nulla facilisi.
+Pellentesque tempus nisi et interdum convallis. In quam ante, vulputate at massa et, rutrum gravida dui. Phasellus tristique libero at ex.</description>
+    </item>
+    
+  </channel>
+</rss>
