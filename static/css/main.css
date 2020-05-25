@@ -105,7 +105,7 @@ html, body {
       'main'
       'footer';
     width: 100%;
-    max-width: 1500px;
+    max-width: 1300px;
 }
 
 .blog-post {
@@ -191,7 +191,7 @@ li {
     }
 }
 
-@media only screen and (min-width: 1550px) {
+@media only screen and (min-width: 1350px) {
     .header-collection {
         padding-right: 0px;
     }
