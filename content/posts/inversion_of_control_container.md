@@ -1,7 +1,7 @@
 ---
 title: "Inversion of Control Container"
-date: 2016-06-06T16:26:19+02:00
-description: AutoMapper is a library for the .NET platform, which has the task of mapping an object to another. The usefulness comes when working with views or APIs where data must be presented or sent. In the provided cases, one uses view models for view rendering, or data transfer objects when working with APIs.
+date: 2016-06-26T16:26:19+02:00
+description: "ASP.NET Core comes with a build in inversion of control container. In this post, I will introduce the concept of inversion of control and show how to use the build in container in ASP.NET Core to handle the dependencies of your application."
 ---
 
 ## Inversion of Control Container
