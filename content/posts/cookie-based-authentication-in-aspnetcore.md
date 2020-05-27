@@ -1,6 +1,6 @@
 ---
 title: "Cookie Based Authentication in ASP.NET Core"
-date: 2017-12-01T16:26:19+02:00
+date: 2017-01-12T16:26:19+02:00
 description: "ASP.NET Core comes with a cookie middleware system that can be used without ASP.NET Core Identity. The reason to use cookie authentication instead of ASP.NET core identity is that you want to provide your own database and login implementation."
 ---
 
