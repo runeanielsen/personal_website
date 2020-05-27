@@ -4,11 +4,11 @@ date: 2016-09-06T16:26:19+02:00
 description: "In this blog post, I will talk about Entity Framework Code First. I expect that you have a basic understanding of Entity Framework, what it is, and how it works. I will talk about best practice and why we should use Entity Framework Code First. First, I will show an example of a code first implementation."
 ---
 
-## Entityframework Code First
+# Entityframework Code First
 
 In this blog post, I will talk about Entity Framework Code First. I expect that you have a basic understanding of Entity Framework, what it is, and how it works. I will talk about best practice and why we should use Entity Framework Code First. First, I will show an example of a code first implementation.
 
-### Example
+## Example
 
 I’ve created a clean ASP.NET MVC (4.61) solution with Entity Framework installed (6.1.3).
 
@@ -16,7 +16,7 @@ Project structure looking like the picture below.
 
 ![Solution structure for ASP.NET MVC application.](/blogpost/f5fc4a7f-8952-4e50-8308-2a703b40fa9d.png)
 
-### Database Context
+## Database Context
 
 The first step is to create a context.
 
@@ -59,7 +59,7 @@ Now we need to add a connection string to the web.config file. So go to your web
 </connectionStrings>
 ```
 
-### Models
+## Models
 
 Next step is to create some models that we can use. In this example, I’ve created a “Product” class and a “Store” class.  The two classes have a one to many relationship.
 
@@ -101,7 +101,7 @@ The DbSet<T> is a way to tell Entity Framework what collection of entities that 
 
 When the entities are added to the DbSet we can start running a code-first migration, but before we can start a migration, we have to enable it.
 
-#### Code-first migration
+## Code-first migration
 
 Open your NuGet package manager console and type: **enable-migrations**
 
@@ -218,7 +218,7 @@ If we take a look, at the database we can see that it contains three tables. “
 
 The reason that the Migration table is in the database is to keep track of our migrations, this comes handy in larger projects when more people are adding to the migrations this is because Entity Framework will know which migrations to execute on the database.
 
-### Seeding the Database
+## Seeding the Database
 
 Seeding the database is very simple, the way that I have found to do it the best is by creating an empty migration and create SQL queries in that migration.
 
@@ -254,7 +254,7 @@ If you did it correctly you will now have a database with the newly queried data
 
 Note that seeding the database should only be with values that are either needed for testing, or for a specific purpose. A good example of using seeding is to seed a database with administrative roles.
 
-### Data Annotation
+## Data Annotation
 
 Data annotations can be used by Entity Framework, to manage how the tables in the database should be created. As I showed earlier in this post, we used the [Key] attribute to say that the Id property was the primary key for the table.
 
@@ -291,7 +291,7 @@ Your table should now look like the one below. With the name being required and 
 
 ![Maxlength of name now changed to nvarchar(50).](/blogpost/539eb047-3878-4d76-a596-f6206880a7f0.png)
 
-### Using the Database Context
+## Using the Database Context
 
 Now that we have a working database, with data and a database context class we can start using it.
 
@@ -303,7 +303,7 @@ var products = context.Products.ToList();
 var stores = context.Stores.ToList();
 ```
 
-#### So why use code first?
+## So why use code first?
 
 So all this seemed like a long process just to make a database with two tables in it. Why not just use Entity Frameworks Database or Model first approach? The problem is that they make a big .edmx model file with a lot of auto-generated code that we should not tamper with. The only way to make extra functionality or add properties that should not be in the database is by extending the model classes that are inside of the .edmx file.
 

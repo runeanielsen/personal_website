@@ -4,6 +4,8 @@ date: 2017-17-01T16:26:19+02:00
 description: "Using caching is an essential way to improve performance in your application. With ASP.NET Core you have to download and setup the associated middlewares. In this blog post, I will introduce you to response caching and show how to implement it in a web application."
 ---
 
+# Response Caching in ASP.NET Core
+
 Using caching is an essential way to improve performance in your application. With ASP.NET Core you have to download and setup the associated middlewares. In this blog post, I will introduce you to response caching and show how to implement it in a web application.
 
 ## What is response caching
@@ -14,7 +16,7 @@ Response caching works because all browsers implement an HTTP cache. The HTTP ca
 
 _An example of a response header with cache control. _
 
-_![](/blogpost/f4f89487-9ba6-46ea-bab3-6f656f66b240.png)_
+![example of a response header with cache control](/blogpost/f4f89487-9ba6-46ea-bab3-6f656f66b240.png)
 
 Most of the time you will also see response headers with the e-tag attribute. The e-tag attribute is a token based value that identifies if the content on the server has changed or not. If the e-tag value is still the same after the expiration of cache-control, the browser will return the same cached version of the content to the user. In most cases, you would want to use the e-tag attribute.
 

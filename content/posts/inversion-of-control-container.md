@@ -4,7 +4,7 @@ date: 2016-06-26T16:26:19+02:00
 description: "ASP.NET Core comes with a build in inversion of control container. In this post, I will introduce the concept of inversion of control and show how to use the build in container in ASP.NET Core to handle the dependencies of your application."
 ---
 
-## Inversion of Control Container
+# Inversion of Control Container
 
 To get straight to the facts, we use an IoC container because it help us to decouple our classes and make our life easier when it comes to unit testing. An IoC container is in most cases a framework that will help you manage your classes/objects, this includes creation, destruction, managing the lifetime of the objects and dependencies.
 
@@ -25,7 +25,7 @@ So instead of passing in concrete implementations we will make use of DIP and in
 
 This will greatly help us when it comes to creating mocking objects for unit testing and if we ever want to change the solution, like using another logging framework.
 
-### IoC Container Frameworks
+## IoC Container Frameworks
 
 There are currently a lot of IoC container frameworks available for use. I am mainly a .NET developer, so I will introduce you to a few that are available for the .NET platform.
 
@@ -38,7 +38,7 @@ There are currently a lot of IoC container frameworks available for use. I am ma
 
 Overall it doesn’t matter which framework you pick, they all do pretty much the same thing. The reason to pick one over the other would be because you like one of the frameworks syntax better than the others.
 
-### Autofac IoC Container Framework
+## Autofac IoC Container Framework
 
 So I have used all of the IoC frameworks above, but I like Autofac the most, so that will be the framework I will show an implementation of in this section. [Link Autofac.](http://autofac.readthedocs.io/)
 

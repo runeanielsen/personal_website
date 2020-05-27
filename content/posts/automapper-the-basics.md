@@ -4,7 +4,8 @@ date: 2016-06-06T16:26:19+02:00
 description: AutoMapper is a library for the .NET platform, which has the task of mapping an object to another. The usefulness comes when working with views or APIs where data must be presented or sent. In the provided cases, one uses view models for view rendering, or data transfer objects when working with APIs.
 ---
 
-## AutoMapper
+# AutoMapper the basics
+
 AutoMapper is a library for the .NET platform, which has the task of mapping an object to another. The usefulness comes when working with views or APIs where data must be presented or sent. In the provided cases, one uses view models for view rendering, or data transfer objects when working with APIs.
 
 The usefulness of a mapping framework lies in that you without it would end up with many manual mappings. Manual mappings can be both time-consuming to create, but also easily breakable in case of domain model changes.
@@ -17,7 +18,7 @@ Another reason to create a view model or data transfer object is that you don't 
 
 In the code below I will show a creation of a view model. The example matches the creation of a data transfer object as well.
 
-#### Example of simple customer model
+Example of simple customer model
 
 ```C#
 public class Customer
@@ -42,7 +43,7 @@ As you can see in the code above, we only want to expose the “firstname” and
 
 To map this the normal way without AutoMapper, we manually have to assign each property from the view model to the domain model. This is a pretty quick task when dealing with a low amount of properties, but when the number of properties gets high, the mapping becomes a very time-consuming task, and the same mappings will occur in many places. To solve this problem we can use AutoMapper.
 
-#### An example of manual mapping.  
+An example of manual mapping.
 
 ```C#
 var customer = new Customer
@@ -115,7 +116,6 @@ CreateMap<CreateCustomerViewModel, Customer>().ReverseMap();
 
 The way that AutoMapper works is that it finds properties with the same type and name and maps the properties that match. When you have created your mappings, you need to initialize the mappings. This is usually done in the “Global.asax” file in the root folder of your project.
 
-
 Here you specify the mapping profiles you want to initialize. For every mapping profile, you want to use, remember to initialize them. 
 
 ```C#
@@ -136,7 +136,6 @@ namespace AutomapperExample
     }
 }
 ```
-
 
 ## Using AutoMapper.
 

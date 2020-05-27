@@ -4,17 +4,17 @@ date: 2016-08-01T16:26:19+02:00
 description: "With the release of ASP.NET Core 1.0, Microsoft encourages developers to use task runners like Gulp and Grunt. In this blog, I will go over the basic to get started setting up Gulp for an ASP.NET Core application."
 ---
 
-## Using Gulp with ASP.NET Core 1.0
+# Using Gulp with ASP.NET Core 1.0
 
 With the release of ASP.NET Core 1.0, Microsoft encourages developers to use task runners like Gulp and Grunt. In this blog, I will go over the basic to get started setting up Gulp for an ASP.NET Core application.
 
-### Quick introduction to Gulp
+## Quick introduction to Gulp
 
 Gulp is a task runner tool that is built on Node.js with the use of the JavaScript language. It is used for automating tasks such as minification, copying of JavaScript/CSS files, static images and so on. Gulp is capable of watching your files and do the assigned tasks on file changes. There has been created a lot of open source extensions to Gulp and Gulp can, therefore, do a lot of different tasks from reloading the browser on file changes to compile SASS/LESS files to CSS. The usage of Gulp as a task runner increases the productivity in software development.
 
 In this blog post, I will show how to create a Gulp file that combines a lot of javascript and CSS files into two single files a CSS file and a JavaScript file minifies them and moves them to another folder.
 
-### Setting up the project
+## Setting up the project
 
 To start using Gulp you should download Node from [https://nodejs.org/](https://nodejs.org/) we will use the Node package manager(npm) to install gulp for our solution which comes with the Node installment.
 
@@ -34,9 +34,9 @@ If you don’t want to use yeoman or npm, you can just create an empty asp.net c
 
 If you want to compare your folder structure to mine, the structure is shown in the image below.
 
-###  ![Solution structure](/images/blogpost/4aed8bac-bc55-4aaa-b4e5-0f923b508fa9.png)
+![Solution structure](/blogpost/4aed8bac-bc55-4aaa-b4e5-0f923b508fa9.png)
 
-### Installing Gulp
+## Installing Gulp
 
 Now that the application is setup and ready, we should install Gulp with npm. You can install Gulp in two ways, either by manually adding a package.json file and add the following code into the file:
 
@@ -91,7 +91,7 @@ npm install gulp-uglify  –save-dev
 
 This will install Gulp and three “extensions” as development dependencies, meaning that it is only for development purposes and not for deployment, the dependencies will be added to the package.json file. If you did it correctly you will now have a folder named node_modules and in that folder, containing all the files needed to run Gulp.
 
-### Setting up Gulp
+## Setting up Gulp
 
 To start out create a new file and name it ‘gulpfile.js’ when that is created we need to make a reference to gulp, to do that, write the following code.
 
@@ -105,7 +105,6 @@ var cssmin = require("gulp-cssmin");
 This will allow us to use the functionality of Gulp and the extra modules by using the reference variables.
 
 Next thing is to make a reference to the folders that we want to work with, this can be done in multiple ways, but I like the following the best.
-
 
 ```js
 var paths = {
@@ -125,7 +124,7 @@ Remember to create the “Client” folder and place a “Scripts” and a “St
 
 Place some code inside of the files for testing later, I just inserted an immediately-invoked function expression(IFFE) that alerts “Hello World One” and another IFFE alerting “Hello World Two” you can do the same if you want to.
 
-### Creating your first task
+## Creating your first task
 
 Now that Gulp is set up and we have created paths and reference variables we can create our first task. A task is approximately the same as a method/function, but it will be called from the command prompt using the gulp command followed by a task name.
 
@@ -211,7 +210,7 @@ gulp.task("minify", ["minify:js", "minify:css"]);
 
 So in the modified code, we have added a new task and changed it to use ‘cssmin’ function and added the “minify:css” task to the “minify” task. So now if run the gulp minify command we will combine both the CSS and JavaScript files into two files and move them to the folders we specified in the path variables.
 
-### Watching files with Gulp
+## Watching files with Gulp
 
 So now that we have created two tasks to combine, minify and move files you will notice very fast that it is very time-consuming and annoying to call the task everytime yourself when a file changes. To avoid having to call it ourselves we can make use of the ‘watch’ function in Gulp.
 

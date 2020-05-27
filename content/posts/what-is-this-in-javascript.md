@@ -4,6 +4,8 @@ date: 2017-03-23T16:26:19+02:00
 description: "In a language like C# 'this' always points to the containing class, so going into JavaScript you might think that 'this' always points to the containing function, but this is not the case. Sometimes you will find 'this' actually pointing to the function, but other times you will find it pointing to the global object or to something third. In this post, I will go through the rules of how the 'this' binding is being set, so hopefully, development in JavaScript using the 'this' keyword will get easier and less confusing."
 ---
 
+# What is 'this' in JavaScript
+
 If you're like me coming from a strictly typed language like Java or C#, you will most likely get confused very fast going into JavaScript using the 'this' keyword.
 
 In a language like C# 'this' always points to the containing class, so starting programming in JavaScript you might think that 'this' always points to the containing function. Sometimes you will find "this" actually pointing to the containing function, but other times you will find it pointing to the global object or even to something third. In this post, I will go through the rules of how 'this' is being set. Hopefully, after reading this blog post, development in JavaScript using the 'this' keyword will get easier and less confusing. 

@@ -4,6 +4,8 @@ date: 2017-03-23T16:26:19+02:00
 description: "In JavaScript, a variable can be declared after it has been used. In other words, a variable can be used before it has been declared, this is called hoisting. The term hoisting cannot be found in the official JavaScript documents, but the term was invented as a general way of thinking about what happens in the compilation phase when variables and function declarations are moved to the top of their containing scope. To be exact the variables are not being moved to the top of the scope, but they're being stored in memory doing the compile phase, so they can be used in the execution phase."
 ---
 
+# Hoisting in JavaScript
+
 In JavaScript, a variable can be declared after it has been used. In other words, a variable can be used before it has been declared, this is called **hoisting**. The term hoisting cannot be found in the official JavaScript documents, but the term was invented as a general way of thinking about what happens in the compilation phase when variables and function declarations are "moved" to the top of their containing scope. To be exact the variables are not being moved to the top of the scope, but they're being stored in memory doing the compile phase, so they can be used in the execution phase. 
 
 The following code shows an example where we declare the variable 'a'. Because of hoisting the variable 'a' will get hoisted to the top of the function scope and be initialized to the value assignment of 10\. In a language who does not hoist, this would have thrown an error.

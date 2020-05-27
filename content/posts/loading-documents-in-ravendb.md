@@ -4,6 +4,8 @@ date: 2016-09-18T16:26:19+02:00
 description: "This blog post will address RavenDB. I will show how to retrieve and query documents and then review some technical details about the underlying framework which takes advantage of RavenDB. I will give a short introduction to the session object that is used to load the documents and how to override the default settings of RavenDB document store."
 ---
 
+# Loading Documents in RavenDB
+
 This blog post will address RavenDB. I will show how to retrieve and query documents and then review some technical details about the underlying framework which takes advantage of RavenDB. 
 
 I will give a short introduction to the session object that is used to load the documents and how to override the default settings of RavenDB document store.

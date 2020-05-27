@@ -4,6 +4,8 @@ date: 2017-03-04T16:26:19+02:00
 description: "A lot of developers today write their styles in a transpiled language like Sass or Less. Creating a setup is needed to transpile, bundle and minify the code. In this post I will show you how to setup a build flow with Webpack 2, to transpile, bundle, minify and add vendor specific CSS to the final bundle."
 ---
 
+# Webpack 2 handling Sass
+
 In this post, I will introduce how to use Webpack 2 to work with Sass files using loaders to bundle, minify, transpile and automatically add vendors specific CSS to the final bundle. If you're new to webpack you should read this post [link](../../../post/webpack-2-bundling-javascript) which contains an introduction to webpack.
 
 To get started you should have a project with the following files.

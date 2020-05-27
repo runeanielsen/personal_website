@@ -4,7 +4,7 @@ date: 2016-07-10T16:26:19+02:00
 description: "In a modern day web application, we want to use APIs for creating responsive web applications. This is done by using async calls to the APIs and therefore reduce the number of postbacks to the server, making a better user experience and reducing the load on the web server."
 ---
 
-## Creating API's in ASP.NET MVC
+# Creating API's in ASP.NET MVC
 
 In a modern day web application, we want to use APIs for creating responsive web applications. This is done by using async calls to the APIs and therefore reduce the number of postbacks to the server, making a better user experience and reducing the load on the web server.
 
@@ -12,7 +12,7 @@ An example of using this principle is SPAs (Single Page Application). The princi
 
 So to get all the benefits that an API gives us, we have to know how to create one and how to consume it. It is very easy nowadays and if you’re familiar with creating controllers in ASP.NET MVC 5 then learning to create an API won’t take long.
 
-### Setting up the project
+## Setting up the project
 
 I’ve created an empty ASP.NET web application with a reference to MVC, as shown below.
 
@@ -26,9 +26,9 @@ When the package has been installed the next step is to create a folder to hold 
 
 Inside of the “Api” folder, you create a new class and name it “BooksController”.
 
-### ![Solution structure.](/blogpost/dc35aa78-accc-4ac0-889b-81e99d09ed87.png)
+![Solution structure.](/blogpost/dc35aa78-accc-4ac0-889b-81e99d09ed87.png)
 
-### Creating the API
+## Creating the API
 
 The first thing to do is to inherit from “ApiController” in “System.Web.Http”, that class gives all the implementations we need to create REST based APIs.
 
@@ -55,7 +55,7 @@ Here is a list of the status codes that I use the most and the method to return 
 
 The last thing we need to finish in the “GetBooks” API action is to return data. I’ve created some static sample data that we can work with.
 
-#### The book class
+### The book class
 
 ```C#
 using System;
@@ -72,7 +72,7 @@ namespace ApiExample.Models
 }
 ```
 
-#### The updated controller
+### The updated controller
 
 ```C#
 using ApiExample.Models;
@@ -109,7 +109,7 @@ We pass the “_books” list into the “Ok();” return, that way the object w
 
 The way data gets into the controller is bad practice and is only implemented that way to make the solution simple, in a real world you would receive the data from a class that deals with the persistence of the application.
 
-### Routing
+## Routing
 
 To make use of the API we have created, we will have to configure a route to the API.
 
@@ -176,7 +176,7 @@ The only line added is:
 GlobalConfiguration.Configure(WebApiConfig.Register);
 ```
 
-### Using the API
+## Using the API
 
 So to use the API you can either implementing some code that can consume the API or use a tool to call the API to check that it works. In this example, we will just use a third party tool named Postman and call the API. You can download it here [https://www.getpostman.com/](https://www.getpostman.com/).
 

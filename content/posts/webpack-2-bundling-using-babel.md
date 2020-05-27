@@ -4,6 +4,8 @@ date: 2017-02-05T16:26:19+02:00
 description: "Browser compatibility can be a pain and make you not use the new features of JavaScript ES6 and beyond. Luckily there is a savior, Babel. Babel is a way to transpile ES6+ JavaScript code to your version of choice. In this post I will show you have to setup Babel using Webpack 2 to transpile ES6 to ES5 JavaScript."
 ---
 
+# Webpack 2 bundling using Babel
+
 In my previous blog post, I introduced Webpack 2 and showed how to set up bundling for JavaScript [link](../../../post/webpack-2-bundling-javascript). In this blog post I will show you how to add loaders to Webpack, so you can transpile ES5 and beyond to JavaScript so you can get the benefits of the new syntax without having to worry about browser support.
 
 ## Project structure

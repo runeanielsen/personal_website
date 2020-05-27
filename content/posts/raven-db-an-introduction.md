@@ -4,17 +4,17 @@ date: 2016-08-26T16:26:19+02:00
 description: "In this blog post, I will make a small introduction to document based database systems. I will talk about the benefits that RavenDB has over other database systems. In the last section of the blog, I will guide you through a simple console application using RavenDB, and talk about some of the overall concepts you need to know to start working with RavenDB. This blog post will not be a detailed guide using best practices, but rather an overall introduction to RavenDB."
 ---
 
-## RavenDB an introduction
+# RavenDB an introduction
 
 RavenDB is a good choice for .NET developers that want to use a document database. RavenDB comes with a great library for development in .NET with C#. The library can be downloaded with NuGet package manager.
 
 In this blog post, I will make a small introduction to document based database systems. I will talk about the benefits that RavenDB has over other database systems. In the last section of the blog, I will guide you through a simple console application using RavenDB, and talk about some of the overall concepts you need to know to start working with RavenDB. This blog post will not be a detailed guide using best practices, but rather an overall introduction to RavenDB.
 
-### Document database vs Relational database
+## Document database vs Relational database
 
 To understand the difference between a relational database and a document database we will have to look, at why the relational database was first created and what problem the database system tried to solve.
 
-### History of the relational database
+## History of the relational database
 
 Back in the day’s computer storage was very expensive, so relational databases were created to solve the problem that companies had with expensive storage hardware. The relational database solved this by creating relations between data, so multiple data sets could reference the same data and by that eliminate duplicated data. Reading wasn’t as important as writing to the database, because of that the developers decided to make writes faster than reads, but in a modern day application reads are much more frequent than writes and the users are used to a very fast response time doing reads, therefore the databases should be optimized for reads rather than writes in most modern applications.
 
@@ -24,7 +24,7 @@ Before I stop talking about the problems with relational database systems I have
 
 Relational database systems have been an industry standard for a long time and has been that because it is a very solid database, but many of the modern applications dealing with huge amount of data require a new type of database system to solve their needs, that is why RavenDB was created.
 
-### RavenDB is a document database
+## RavenDB is a document database
 
 RavenDB is a document database, this means that it saves its data in a document rather than in a table. The data is structured in JSON(JavaScript Object Notation) format. A RavenDB document looks like the following:
 
@@ -113,7 +113,7 @@ One thing to notice about the models are that the Product holds a ProductGroup, 
 
 Because RavenDB is a document database, all the ProductGroup data would be in the same document as if Product referenced to the ProductGroup object directly, so in most cases, it is better to store the “reference” as in id, so you can load the ProductGroup on the Id if you ever have to.
 
-### Creating the Store
+## Creating the Store
 
 To connect to the database we will need to create a document store. A document store holds the connection string and the configuration that can be set dealing with communication between the client and the database.
 
@@ -196,7 +196,7 @@ namespace ExampleRaven
 
 If the code ran successfully you will have the following data showing in your RavenDB studio.
 
- ![Shows the RavenDB interface with data](/images/blogpost/e07c82f0-91aa-4795-afbf-604cc0467b69.png)
+ ![Shows the RavenDB interface with data](/blogpost/e07c82f0-91aa-4795-afbf-604cc0467b69.png)
 
 The last thing to do is to connect the Products to the ProductGroups to see them “reference”each other.
 
