@@ -112,4 +112,4 @@ if everything went well you will see the following output and have a file named 
 
 Next just add the script to your HTML page and load it inside of your browser and you should see the following output inside the console window.
 
-![Ouput in web browser](/blogpost/webpack output window.png)
+![Ouput in web browser](/blogpost/04e08aff-72c7-45c4-8a8b-5a26898cc65e.png)
