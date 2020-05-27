@@ -1,5 +1,5 @@
 ---
-title: Webpack 2 bundling JavaScript
+title: "Webpack 2 bundling JavaScript"
 date: 2017-01-30T16:26:19+02:00
 description: "JavaScript heavy websites are becoming more and more common. To reduce the number of HTTP requests and solve the problems with which order scripts should be loaded, tools like Webpack has emerged. In this post, I will show you how to setup Webpack 2 and use it to bundle JavaScript files. To follow the guide you should have node package manager installed and have a basic understanding of modules in JavaScript."
 ---
