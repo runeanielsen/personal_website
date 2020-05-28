@@ -223,6 +223,14 @@ html, body {
     text-align: left;
     text-justify: distribute;
 }
+
+.blog-post li {
+    padding: 5px;
+}
+
+.blog-post ol p {
+    padding: 0;
+}
 /* END Blog Post */
 
 
@@ -263,15 +271,6 @@ ol, ul {
     list-style: circle;
     margin-left: 20px;
 }
-
-li {
-    padding: 5px;
-}
-
-li p {
-    padding: 0;
-}
-
 /* END Layout Blog Post */
 
 @media only screen and (min-width: 768px) {
