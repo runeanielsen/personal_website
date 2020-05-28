@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://runenielsen.com/posts/introduction-to-fetch-in-javascript/</loc>
-    <lastmod>2017-06-05T16:26:19+02:00</lastmod>
+    <loc>https://runenielsen.com/posts/async-await-in-javascript/</loc>
+    <lastmod>2017-06-12T16:26:19+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://runenielsen.com/posts/</loc>
-    <lastmod>2017-06-05T16:26:19+02:00</lastmod>
+    <lastmod>2017-06-12T16:26:19+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://runenielsen.com/</loc>
+    <lastmod>2017-06-12T16:26:19+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://runenielsen.com/posts/introduction-to-fetch-in-javascript/</loc>
     <lastmod>2017-06-05T16:26:19+02:00</lastmod>
   </url>
   
