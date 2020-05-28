@@ -15,7 +15,8 @@ rm -r ./blogpost ./categories ./css ./page ./posts ./tags ./index.html ./index.x
 cd ..
 
 # Build the project.
-hugo # if using a theme, replace with `hugo -t <YOURTHEME>`
+hugo --gc --minify # if using a theme, replace with `hugo -t <YOURTHEME>`
+
 
 # Go To Public folder
 cd public
