@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Webpack 2 bundling JavaScript</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="JavaScript heavy websites are becoming more and more common. To reduce the number of HTTP requests and solve the problems with which order scripts should be loaded, tools like Webpack has emerged. In this post, I will show you how to setup Webpack 2 and use it to bundle JavaScript files. To follow the guide you should have node package manager installed and have a basic understanding of modules in JavaScript.">
+	<meta property="article:published_time" content="17-07-2017 00:00:00">
+
+	<link async href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700" rel="stylesheet"> 
+	<link async rel="stylesheet" href="/css/main.css" type="text/css" />
+	<link async rel="icon" href="/favicon.ico">
+
+	<script async src="https://kit.fontawesome.com/0d71694d01.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="grid-container">
+		<header class="header">
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" href="/">
+                <h1 class="header-item__title">Rune Nielsen | Freelance Software Developer</h1>
+            </a>
+        </div>     
+    </div>
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://github.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-github-square"></i>
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://twitter.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-twitter-square"></i> 
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://linkedin.com/in/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-linkedin"></i>
+                </p> 
+            </a>
+        </div>    
+    </div>
+</header>
+
+		
+<div class="blog-post">
+    <div class="blog-post__content">
+        <h1 id="webpack-2-bundling-javascript">Webpack 2 bundling JavaScript</h1>
+<p>JavaScript heavy websites are becoming more and more common. To reduce the number of HTTP requests and solve the problems with which order scripts should be loaded, tools like Webpack has emerged. In this post, I will show you how to setup Webpack 2 and use it to bundle JavaScript files. To follow the guide you should have node package manager installed and have a basic understanding of modules in JavaScript.</p>
+<h2 id="setting-up-project">Setting up project</h2>
+<p>I have created a basic project with the following file structure and code inside of each file.</p>
+<p><img src="/blogpost/d15968d6-b937-4767-bec7-3f7d3263e86b.png" alt="solution structure"></p>
+<p>calculate.js</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">calculate</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">a</span>, <span style="color:#a6e22e">b</span>) =&gt; <span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>;
+
+<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">calculate</span>;
+</code></pre></div><p>index.js</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">calculate</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;./calculate&#39;</span>);
+
+<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">calculate</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>);
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">value</span>);
+</code></pre></div><p>index.html</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">head</span>&gt;&lt;/<span style="color:#f92672">head</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+
+&lt;/<span style="color:#f92672">body</span>&gt;
+</code></pre></div><p>package.json</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;webpack-constructcode&#34;</span>,
+    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;1.0.0&#34;</span>,
+    <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+    <span style="color:#f92672">&#34;main&#34;</span>: <span style="color:#e6db74">&#34;index.js&#34;</span>,
+    <span style="color:#f92672">&#34;scripts&#34;</span>: {
+    },
+    <span style="color:#f92672">&#34;author&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+    <span style="color:#f92672">&#34;license&#34;</span>: <span style="color:#e6db74">&#34;ISC&#34;</span>
+}
+</code></pre></div><h2 id="webpack-2">Webpack 2</h2>
+<p>To install Webpack 2 run the following command</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">npm install --save-dev webpack@2.2.0-rc.0
+</code></pre></div><p>Next, create a file named &ldquo;webpack.config.js&rdquo; in the root folder and add the following code.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#39;path&#39;</span>);
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">config</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">entry</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;./src/index.js&#39;</span>,
+    <span style="color:#a6e22e">output</span><span style="color:#f92672">:</span> {
+        <span style="color:#a6e22e">path</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">path</span>.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">__dirname</span>, <span style="color:#e6db74">&#39;build&#39;</span>),
+        <span style="color:#a6e22e">filename</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;bundle.js&#39;</span>
+    }
+}
+
+<span style="color:#a6e22e">module</span>.<span style="color:#a6e22e">exports</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">config</span>;
+</code></pre></div><p>The important part of the code is the config object. Inside of the object, we specify an entry. The entry is the first point where Webpack will run and check all exports and imports and build the dependency tree from it. In the example were using here there is only one dependency from index.js to calculate.js. After the entry, an output object is created. The output contains a path which resolves the current directory and says that the output should be created in the &ldquo;build&rdquo; folder (If you don&rsquo;t want to use the path.resolve method you can also specify the absolute path yourself). Next, comes the filename which will be the output file name of the bundled file, a standard convention is to name it &ldquo;bundle.js&rdquo;.</p>
+<h3 id="running-webpack">Running Webpack</h3>
+<p>To run Webpack there are two ways, the first is to install Webpack globally on your machine. I personally don&rsquo;t like this approach since you will most likely be using Webpack on a lot of different projects with different versions, and therefore would have to configure the global Webpack everytime you switch between projects. The path I would take would be to setup a script inside of the &ldquo;package.json&rdquo; file. So the file now looks like the following. Containing a &ldquo;build&rdquo; script running the &ldquo;webpack&rdquo; command.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;webpack-constructcode&#34;</span>,
+    <span style="color:#f92672">&#34;version&#34;</span>: <span style="color:#e6db74">&#34;1.0.0&#34;</span>,
+    <span style="color:#f92672">&#34;description&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+    <span style="color:#f92672">&#34;main&#34;</span>: <span style="color:#e6db74">&#34;index.js&#34;</span>,
+    <span style="color:#f92672">&#34;scripts&#34;</span>: {
+    <span style="color:#f92672">&#34;build&#34;</span>: <span style="color:#e6db74">&#34;webpack&#34;</span>
+    },
+    <span style="color:#f92672">&#34;author&#34;</span>: <span style="color:#e6db74">&#34;&#34;</span>,
+    <span style="color:#f92672">&#34;license&#34;</span>: <span style="color:#e6db74">&#34;ISC&#34;</span>,
+    <span style="color:#f92672">&#34;devDependencies&#34;</span>: {
+    <span style="color:#f92672">&#34;webpack&#34;</span>: <span style="color:#e6db74">&#34;^2.2.0-rc.0&#34;</span>
+    }
+}
+</code></pre></div><p>So now to run the build command just type this in your console.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">npm run build
+</code></pre></div><p>if everything went well you will see the following output and have a file named &ldquo;bundle.js&rdquo; inside of your &ldquo;build&rdquo; folder.</p>
+<p><img src="/blogpost/b4bd6764-1d4d-450a-9e59-6598fd2710df.png" alt=""></p>
+<p>Next just add the script to your HTML page and load it inside of your browser and you should see the following output inside the console window.</p>
+<p><img src="/blogpost/04e08aff-72c7-45c4-8a8b-5a26898cc65e.png" alt="Ouput in web browser"></p>
+   
+    </div>
+</div>
+
+		<footer class="footer">
+</footer>
+	
+	</div>
+</body>
+</html>

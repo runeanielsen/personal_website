@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Cookie Based Authentication in ASP.NET Core</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="ASP.NET Core comes with a cookie middleware system that can be used without ASP.NET Core Identity. The reason to use cookie authentication instead of ASP.NET core identity is that you want to provide your own database and login implementation.">
+	<meta property="article:published_time" content="17-07-2017 00:00:00">
+
+	<link async href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700" rel="stylesheet"> 
+	<link async rel="stylesheet" href="/css/main.css" type="text/css" />
+	<link async rel="icon" href="/favicon.ico">
+
+	<script async src="https://kit.fontawesome.com/0d71694d01.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="grid-container">
+		<header class="header">
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" href="/">
+                <h1 class="header-item__title">Rune Nielsen | Freelance Software Developer</h1>
+            </a>
+        </div>     
+    </div>
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://github.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-github-square"></i>
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://twitter.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-twitter-square"></i> 
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://linkedin.com/in/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-linkedin"></i>
+                </p> 
+            </a>
+        </div>    
+    </div>
+</header>
+
+		
+<div class="blog-post">
+    <div class="blog-post__content">
+        <h1 id="cookie-based-authentication-in-aspnet-core">Cookie based authentication in ASP.NET Core</h1>
+<p>ASP.NET Core comes with a cookie middleware system that can be used without ASP.NET Core Identity. Cookie authentication lets you provide your own database and login implementation.</p>
+<p>Cookie authentication works by creating a user principal and serialize it into an encrypted cookie. Then on request ASP.NET validates the cookie and recreates the principal and assigns it to the HttpContext.</p>
+<p>This post will go over the implementation of cookie based authentication in ASP.NET Core 1.0 and 1.1. ASP.NET Core 2.0 has a new implementation of cookie based authentication.</p>
+<h2 id="setting-up-the-middleware">Setting up the middleware</h2>
+<p>Start by adding the following dependencies to your solution. This can be done either by using the NuGet-Package manager interface or by utilizing the package manager console.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">Install-Package Microsoft.AspNetCore.Authentication.Cookies
+Install-Package Microsoft.AspNetCore.Mvc
+</code></pre></div><p>Download the NuGet packages and go to the &ldquo;Startup.cs&rdquo; file. Inside of the &ldquo;Startup.cs&rdquo; file, find the method named <strong>Configure.</strong> Add the following code to set up the middleware. <!-- raw HTML omitted -->You are not required configure the middleware exactly as shown below, you should configure it to suit your needs<!-- raw HTML omitted -->.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#">app.UseCookieAuthentication(<span style="color:#66d9ef">new</span> CookieAuthenticationOptions()
+{
+    AuthenticationScheme = <span style="color:#e6db74">&#34;MyCookieMiddlewareInstance&#34;</span>,
+    LoginPath = <span style="color:#66d9ef">new</span> PathString(<span style="color:#e6db74">&#34;/Account/Unauthorized/&#34;</span>),
+    AccessDeniedPath = <span style="color:#66d9ef">new</span> PathString(<span style="color:#e6db74">&#34;/Account/Forbidden/&#34;</span>),
+    AutomaticAuthenticate = <span style="color:#66d9ef">true</span>,
+    AutomaticChallenge = <span style="color:#66d9ef">true</span>
+});
+</code></pre></div><p>A short overview of the cookie middleware configurations used in the example above.</p>
+<ul>
+<li><strong>AuthenticationScheme</strong> - defines the name of the cookie middleware instance. The name will be used when a user is logging in or logging out.</li>
+<li><strong>LoginPath</strong> - is used when a user tries to access a controller with the &ldquo;Authorized&rdquo; attribute and is not logged in. The path should redirect to either an error page or the login screen.</li>
+<li><strong>AccessDeniedPath</strong> - specifies what page the user should be redirected to if a user tries to access a page with user rights which do not correspond to the requirements of a specific page.</li>
+<li><strong>AutomaticAuthenticate</strong> - indicate whether the cookie should be validated on each request and build a new principal.</li>
+<li><strong>AutomaticChallenge</strong> - this flag indicates if the middleware should redirect the browser to the LoginPath or AccessDeniedPath on failed user authentication.</li>
+</ul>
+<p>If you want to follow along add the code below to the <strong>ConfigureServices</strong> method inside of the &ldquo;Startup.cs&rdquo; file. <!-- raw HTML omitted -->Note that the configurations below are not required to make cookie authentication work.<!-- raw HTML omitted --></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#">services.AddMvc();
+</code></pre></div><p>Also, add the following code to the <strong>Configure</strong> method inside of &ldquo;Startup.cs&rdquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#">app.UseMvc(routes =&gt;
+{
+    routes.MapRoute(
+        name: <span style="color:#e6db74">&#34;Default&#34;</span>,
+        template: <span style="color:#e6db74">&#34;{controller}/{action}/{id?}&#34;</span>,
+        defaults: <span style="color:#66d9ef">new</span> { controller = <span style="color:#e6db74">&#34;Home&#34;</span>, action = <span style="color:#e6db74">&#34;Index&#34;</span> }
+    );
+});
+</code></pre></div><h2 id="implement-cookie-authentication">Implement cookie authentication</h2>
+<p>The sample below shows a simple implementation of a login and logout functionality. The login method creates two claims, in this case, a name claim is created and a role claim. None of them are required.</p>
+<p>The important part is to create claims that you want to identify for each user. The claims are then used to create a claims principal. The claims principal contains all the claims and the authentication scheme that we configured in the middleware.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> Microsoft.AspNetCore.Authentication.Cookies;
+<span style="color:#66d9ef">using</span> Microsoft.AspNetCore.Mvc;
+<span style="color:#66d9ef">using</span> System.Security.Claims;
+<span style="color:#66d9ef">using</span> System.Threading.Tasks;
+
+<span style="color:#66d9ef">namespace</span> Solution.Controllers
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LoginController</span> : Controller
+    {
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">async</span> Task&lt;IActionResult&gt; Login()
+        {
+            <span style="color:#66d9ef">var</span> claims = <span style="color:#66d9ef">new</span>[] {
+                <span style="color:#66d9ef">new</span> Claim(<span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#e6db74">&#34;InsertAccountNameHere&#34;</span>),
+                <span style="color:#66d9ef">new</span> Claim(ClaimTypes.Role, <span style="color:#e6db74">&#34;InsertRoleHere&#34;</span>)
+            };
+
+            <span style="color:#66d9ef">var</span> principal = <span style="color:#66d9ef">new</span> ClaimsPrincipal(
+                <span style="color:#66d9ef">new</span> ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme));
+
+            <span style="color:#66d9ef">await</span> HttpContext.Authentication.SignInAsync(<span style="color:#e6db74">&#34;MyCookieMiddlewareInstance&#34;</span>, principal);
+
+            <span style="color:#66d9ef">return</span> Ok();
+        }
+
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">async</span> Task&lt;IActionResult&gt; Logout()
+        {
+            <span style="color:#66d9ef">await</span> HttpContext.Authentication.SignOutAsync(<span style="color:#e6db74">&#34;MyCookieMiddlewareInstance&#34;</span>);
+
+            <span style="color:#66d9ef">return</span> Ok();
+        }
+    }
+}
+</code></pre></div><p>In the above case, we created an API implementation of login and logout functionality. If you want to use a form control and a submit button with a redirection after a success call, just return a view instead of an HTTP 200 response.</p>
+<h3 id="validating-that-it-works">Validating that it works</h3>
+<p>To validate that the cookie is being set, navigate to &ldquo;http://localhost:{your port}/Login/Login&rdquo;. Inside of chrome dev tools under &ldquo;Application&rdquo;, &ldquo;Storage&rdquo; and then to &ldquo;Cookies&rdquo;, you should now see that the authentication cookie has been assigned.</p>
+<p><img src="/blogpost/2caa19e4-b248-4196-bd6e-b6b9fc885c10.png" alt=""></p>
+<p>Next, is to validate that the &ldquo;Logout&rdquo; functionality works. Go to &ldquo;http://localhost:{your port}/Login/Logout&rdquo; and once again navigate to the Chrome dev tools and look under &ldquo;Cookies&rdquo;, if everything works as expected the cookie should now be removed.</p>
+<p><img src="/blogpost/b28c0529-1d27-41bc-9203-cbbbafa846fc.png" alt=""></p>
+<h2 id="using-authentication-on-controllers">Using authentication on controllers</h2>
+<p>To limit a controller to only be accessible to logged in users, you can use the &ldquo;Authorize&rdquo; attribute. If the user is not authorized the user will be redirected to the page you specified in the cookie authentication middleware configuration in the &ldquo;Startup.cs&rdquo; file.</p>
+<p>The attribute can be added to the controller or to a specific method. If you want to only authorize the controller or method to a user with a specific role, you can specify the roles inside the authorize attribute.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> Microsoft.AspNetCore.Authorization;
+<span style="color:#66d9ef">using</span> Microsoft.AspNetCore.Mvc;
+
+<span style="color:#66d9ef">namespace</span> Solution.Controllers
+{
+<span style="color:#a6e22e">    [Authorize]</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AdminController</span> : Controller
+    {
+<span style="color:#a6e22e">        [Authorize(Roles = &#34;Admin&#34;)]</span>
+        <span style="color:#66d9ef">public</span> IActionResult Index()
+        {
+            <span style="color:#66d9ef">return</span> View();
+        }
+    }
+}
+</code></pre></div><p>If we navigate to the URL &ldquo;localhost:{your port}/admin&rdquo; we should be redirected to the unauthorized page specified in the middleware configurations. In this solution, it would be &ldquo;http://localhost:{your port}/Account/Unauthorized/?ReturnUrl=%2FAdmin&rdquo;.</p>
+   
+    </div>
+</div>
+
+		<footer class="footer">
+</footer>
+	
+	</div>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Loading Documents in RavenDB</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="This blog post will address RavenDB. I will show how to retrieve and query documents and then review some technical details about the underlying framework which takes advantage of RavenDB. I will give a short introduction to the session object that is used to load the documents and how to override the default settings of RavenDB document store.">
+	<meta property="article:published_time" content="17-07-2017 00:00:00">
+
+	<link async href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700" rel="stylesheet"> 
+	<link async rel="stylesheet" href="/css/main.css" type="text/css" />
+	<link async rel="icon" href="/favicon.ico">
+
+	<script async src="https://kit.fontawesome.com/0d71694d01.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="grid-container">
+		<header class="header">
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" href="/">
+                <h1 class="header-item__title">Rune Nielsen | Freelance Software Developer</h1>
+            </a>
+        </div>     
+    </div>
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://github.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-github-square"></i>
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://twitter.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-twitter-square"></i> 
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://linkedin.com/in/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-linkedin"></i>
+                </p> 
+            </a>
+        </div>    
+    </div>
+</header>
+
+		
+<div class="blog-post">
+    <div class="blog-post__content">
+        <h1 id="loading-documents-in-ravendb">Loading Documents in RavenDB</h1>
+<p>This blog post will address RavenDB. I will show how to retrieve and query documents and then review some technical details about the underlying framework which takes advantage of RavenDB.</p>
+<p>I will give a short introduction to the session object that is used to load the documents and how to override the default settings of RavenDB document store.</p>
+<p>If you’re new to RavenDB you can read my previous blog post, it is a short introduction to RavenDB. <a href="../../../post/ravendb-an-introduction/" title="Introduction to RavenDB">Link</a></p>
+<h2 id="loading-a-document">Loading a document</h2>
+<p>To load a document in RavenDB you use the ‘Load’ method on the ‘Session’ object that you get from the document store ‘OpenSession’ method.</p>
+<p>The load method is generic, so you will have to specify the type of object that you want to load. If you want to load a type that you haven’t created a class of you can use the ‘dynamic’ keyword to load it without having to implement the class.</p>
+<p>The following code shows how loading a document with RavenDB in C# looks like.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">public</span> Customer LoadCustomer()
+{
+    <span style="color:#66d9ef">var</span> documentStore = DocumentStoreHolder.Store;
+
+    Customer customer;
+
+    <span style="color:#66d9ef">using</span> (<span style="color:#66d9ef">var</span> session = documentStore.OpenSession())
+    {
+        customer = session.Load&lt;Customer&gt;(<span style="color:#e6db74">&#34;customers/1&#34;</span>);
+    }
+
+    <span style="color:#66d9ef">return</span> customer;
+}
+</code></pre></div><p>The code is pretty straight forward we open a session on the document store object and use the load method on the session. We load the document based on an Id of type string.</p>
+<p>RavenDB creates the id’s itself unless you specify the id on the object. By default, RavenDB uses the plural form of the object name and after that sets an incremented id.</p>
+<p>This can be overridden on the document store if you ever want that to change. One thing to consider before starting to override settings on the document store is that you should have a good reason to do it, RavenDB comes with thought out settings, so you must not override them because you can, but if you have a good reason to do it.</p>
+<h2 id="how-the-session-works-when-loading-documents">How the Session works when loading documents</h2>
+<p>The session knows all about the objects it has loaded, this means that if you try to load the same document two times, it will only do a single trip to the database.</p>
+<p>It can do this because the session keeps tracks of all the documents you have loaded. When it sees that you’re going to load a document it checks if it already has it loaded. If the session already has the document loaded it will serve that document to you instead of doing another trip to the database. This reduces the amount of remote calls to the server.</p>
+<p>The session has a limit of how many remote calls it can do to the database in a single session. It has this because it wants to limit the mistakes that developers can make dealing with the session, the limit is 30 remote calls in a single session. If you try to go over the limit an error will be thrown and you will have to rewrite the code to work with the limit of 30 remote calls.</p>
+<p>The setting can be changed if you want to on the document store, but the best choice is to optimize the session to stay inside of the 30 remote calls per session.</p>
+<p>In the code below the max number of request per session has been set to 50, this is done by changing the ‘DocumentConvention’ property on the ‘DocumentStore’ object.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">var</span> documentStore = <span style="color:#66d9ef">new</span> DocumentStore()
+{
+    Url = <span style="color:#e6db74">&#34;http://localhost:8080&#34;</span>,
+    DefaultDatabase = <span style="color:#e6db74">&#34;Northwind&#34;</span>,
+    Conventions = <span style="color:#66d9ef">new</span> DocumentConvention
+    {
+        MaxNumberOfRequestsPerSession = <span style="color:#ae81ff">50</span>
+    }
+};
+</code></pre></div><p>You can change a lot of things on the convention object, but I will let you look into that if you’re interested.</p>
+<h2 id="optimize">Optimize</h2>
+<p>A way to optimize the number of remote calls is to know about the features that RavenDB comes with, below are two examples of loading multiple entities on a single remote call.</p>
+<p>This example shows loading multiple entities of the same type on ids, using a single remote call to the server.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadCustomer()
+{
+    <span style="color:#66d9ef">var</span> documentStore = DocumentStoreHolder.Store;
+
+    <span style="color:#66d9ef">using</span> (<span style="color:#66d9ef">var</span> session = documentStore.OpenSession())
+    {
+        <span style="color:#66d9ef">var</span> companies = session.Load&lt;Company&gt;(<span style="color:#66d9ef">new</span> List&lt;<span style="color:#66d9ef">string</span>&gt; { <span style="color:#e6db74">&#34;companies/64&#34;</span>, <span style="color:#e6db74">&#34;companies/65&#34;</span>, <span style="color:#e6db74">&#34;companies/66&#34;</span> });
+    }
+}
+</code></pre></div><p>This example shows loading different types of entities in on ids, using a single remote call to the server.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadItems()
+{
+    <span style="color:#66d9ef">var</span> documentStore = DocumentStoreHolder.Store;
+
+    <span style="color:#66d9ef">using</span> (<span style="color:#66d9ef">var</span> session = documentStore.OpenSession())
+    {
+        <span style="color:#66d9ef">var</span> data = session.Load&lt;<span style="color:#66d9ef">object</span>&gt;(<span style="color:#66d9ef">new</span> List&lt;<span style="color:#66d9ef">string</span>&gt; { <span style="color:#e6db74">&#34;companies/64&#34;</span>, <span style="color:#e6db74">&#34;products/50&#34;</span>, <span style="color:#e6db74">&#34;orders/66&#34;</span> });
+        <span style="color:#66d9ef">var</span> company = (Company) data[<span style="color:#ae81ff">0</span>];
+    }
+}
+</code></pre></div><p>Because we load the documents as type object, we have to cast it to the proper type. The array that is returned has the elements based on the collection with ids that we inserted. So in our example company/64 is on index 0.</p>
+<p>Using strings to get elements out from the database can be a hassle, so you’re also able to load documents based on the integer value of the id, this is great in web scenarios where you would load a document on a single integer value from an HTTP get request.</p>
+<p>This example shows loading an entity on an integer value.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadItems()
+{
+    <span style="color:#66d9ef">var</span> documentStore = DocumentStoreHolder.Store;
+
+    <span style="color:#66d9ef">using</span> (<span style="color:#66d9ef">var</span> session = documentStore.OpenSession())
+    {
+        <span style="color:#66d9ef">var</span> product = session.Load&lt;Product&gt;(<span style="color:#ae81ff">1</span>);
+
+        Console.WriteLine(product.Name);
+    }
+}
+</code></pre></div><h2 id="include">Include</h2>
+<p>It is important to keep the number of remote calls that you make on a session to a minimum, a way to achieve that is by using the include method on the session object. Include is one of the main ways to reduce the remote calls to the database.</p>
+<p>In most cases, we will make ‘relations’ to other documents by referring to the id of the other document, an example of a document file with a relation to another document looks like the following:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#f92672">&#34;Name&#34;</span>: <span style="color:#e6db74">&#34;Original Frankfurter grüne Soße&#34;</span>,
+    <span style="color:#f92672">&#34;Supplier&#34;</span>: <span style="color:#e6db74">&#34;suppliers/12&#34;</span>,
+    <span style="color:#f92672">&#34;Category&#34;</span>: <span style="color:#e6db74">&#34;categories/2&#34;</span>,
+    <span style="color:#f92672">&#34;QuantityPerUnit&#34;</span>: <span style="color:#e6db74">&#34;12 boxes&#34;</span>,
+    <span style="color:#f92672">&#34;PricePerUnit&#34;</span>: <span style="color:#ae81ff">13</span>,
+    <span style="color:#f92672">&#34;UnitsInStock&#34;</span>: <span style="color:#ae81ff">32</span>,
+    <span style="color:#f92672">&#34;UnitsOnOrder&#34;</span>: <span style="color:#ae81ff">0</span>,
+    <span style="color:#f92672">&#34;Discontinued&#34;</span>: <span style="color:#66d9ef">false</span>,
+    <span style="color:#f92672">&#34;ReorderLevel&#34;</span>: <span style="color:#ae81ff">15</span>
+}
+</code></pre></div><p>The product document refers to the ‘Supplier’ and ‘Category’ document. If we try to load the product document using the ‘Load’ method and try to display the supplier we will get the following output:</p>
+<p>“suppliers/12”</p>
+<p>We don’t want to display the identification value, but rather a property of the object. So we would load the supplier right after the product, like the following code.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadItems()
+{
+    <span style="color:#66d9ef">var</span> documentStore = DocumentStoreHolder.Store;
+
+    <span style="color:#66d9ef">using</span> (<span style="color:#66d9ef">var</span> session = documentStore.OpenSession())
+    {
+        <span style="color:#66d9ef">var</span> product = session.Load&lt;Product&gt;(<span style="color:#ae81ff">77</span>);
+        <span style="color:#66d9ef">var</span> supplier = session.Load&lt;Supplier&gt;(product.Supplier);
+    }
+}
+</code></pre></div><p>This would create two remote calls to the database in a single session, so image having 10 ‘relations’ to other documents on a single object, this would be 10 calls per object. To reduce this we can use the ‘Include’ method.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadItems()
+{
+    <span style="color:#66d9ef">var</span> documentStore = DocumentStoreHolder.Store;
+
+    <span style="color:#66d9ef">using</span> (<span style="color:#66d9ef">var</span> session = documentStore.OpenSession())
+    {
+        <span style="color:#66d9ef">var</span> product = session.Include&lt;Product&gt;(p =&gt; p.Supplier).Load(<span style="color:#ae81ff">1</span>);
+        <span style="color:#66d9ef">var</span> supplier = session.Load&lt;Supplier&gt;(product.Supplier);
+    }
+}
+</code></pre></div><p>The code above looks very much the same as the previous example, but the difference is that we use the ‘Include’ method and pass a lambda expression in and say that the product goes to the supplier.</p>
+<p>After the lambda expression, we load the product and the supplier. The code makes it look like we still do two calls to the database. We actually only do a single call, this is what happens behind the scenes:</p>
+<ol>
+<li>Find a document with the key: “products/12”</li>
+<li>Read its ‘Supplier’ property value.</li>
+<li>Find a document with that key.</li>
+<li>Send both documents back to the client.</li>
+</ol>
+<p>So when we load the product and the supplier we load it directly from the session cache.</p>
+<h2 id="query-the-database">Query the database</h2>
+<p>Loading documents on ids are great, but in most cases, we don´t want to load documents on ids, but rather query the database and get entities out on specific criteria’s. The query mechanism in RavenDB is built on LinQ so it should look very familiar if you come from the .NET world of ORM’s.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-C#" data-lang="C#"><span style="color:#66d9ef">using</span> System.Linq;
+
+<span style="color:#66d9ef">namespace</span> ExampleRaven
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Program</span>
+    {
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> Main(<span style="color:#66d9ef">string</span>[] args)
+        {
+            <span style="color:#66d9ef">var</span> program = <span style="color:#66d9ef">new</span> Program();
+            program.LoadItems();
+        }
+
+        <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> LoadItems()
+        {
+            <span style="color:#66d9ef">var</span> documentStore = DocumentStoreHolder.Store;
+
+            <span style="color:#66d9ef">using</span> (<span style="color:#66d9ef">var</span> session = documentStore.OpenSession())
+            {
+                <span style="color:#66d9ef">var</span> products = session.Query&lt;Product&gt;().Where(a =&gt; a.PricePerUnit &gt; <span style="color:#ae81ff">10</span>);
+            }
+        }
+    }
+}
+</code></pre></div><p>The example above should be straightforward, we load the products using the ‘Query’ method on the session and get all the products where the price per unit is bigger than 10. The items are returned as IEnumerable<!-- raw HTML omitted --> and after that, the items can be worked with.</p>
+<p>I won’t go much over lambda expressions and LinQ in this post, but just tell that you can query the database like you would query a collection of items using LinQ.</p>
+   
+    </div>
+</div>
+
+		<footer class="footer">
+</footer>
+	
+	</div>
+</body>
+</html>

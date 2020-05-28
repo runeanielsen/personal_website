@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>Introduction to Fetch in JavaScript</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Instead of using the good old XMLHttp Request Object in JavaScript. ES6 introduce the concept of Fetch. Fetch provides a cleaner interface for retrieving resources from both internal, but also external sources. The interface will seem familiar to the XMLHttpRequest, but Fetch has both a more powerful and flexible feature set.">
+	<meta property="article:published_time" content="17-07-2017 00:00:00">
+
+	<link async href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700" rel="stylesheet"> 
+	<link async rel="stylesheet" href="/css/main.css" type="text/css" />
+	<link async rel="icon" href="/favicon.ico">
+
+	<script async src="https://kit.fontawesome.com/0d71694d01.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="grid-container">
+		<header class="header">
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" href="/">
+                <h1 class="header-item__title">Rune Nielsen | Freelance Software Developer</h1>
+            </a>
+        </div>     
+    </div>
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://github.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-github-square"></i>
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://twitter.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-twitter-square"></i> 
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://linkedin.com/in/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-linkedin"></i>
+                </p> 
+            </a>
+        </div>    
+    </div>
+</header>
+
+		
+<div class="blog-post">
+    <div class="blog-post__content">
+        <h1 id="introduction-to-fetch-in-javascript">Introduction to Fetch in JavaScript</h1>
+<p>Instead of using the good old XMLHttp Request Object in JavaScript. ES6 introduces the concept of <strong>Fetch</strong>. Fetch provides a cleaner interface for retrieving resources from both internal, but also external sources. The interface will seem familiar to the XMLHttpRequest, but Fetch has both a more powerful and flexible feature set.</p>
+<p>Fetch in its simplest form is a method on the global object that takes in a string. The string should contain the path to the resource, that is to be retrieved.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;path&#39;</span>);
+</code></pre></div><p>To execute the fetch, the <strong>then</strong> method is used. The then method takes in a function callback with an optional parameter.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;myUrl.com&#39;</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">response</span>);
+});
+</code></pre></div><p>The optional parameter is usually named response (you can name it anything you want). The parameter contains an object returned from the fetch method. The most commonly used properties of the response object are the following.</p>
+<ul>
+<li><strong>status</strong>
+<ul>
+<li>Contains the status code from the HTTP call represented as an integer</li>
+</ul>
+</li>
+<li><strong>statusText</strong>
+<ul>
+<li>The status code in text represented as a string. An example of a status text is &ldquo;Ok&rdquo; and corresponds to status code value 200</li>
+</ul>
+</li>
+<li><strong>ok</strong>
+<ul>
+<li>Is a boolean value and is an easy way to check if the status code returned from the request is in the range of 200-299</li>
+</ul>
+</li>
+</ul>
+<p>An example of a response object from a fetch request can be seen below.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;https://api.github.com&#39;</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">response</span>);
+});
+</code></pre></div><p>Resulting in the following data being displayed in the chrome dev tools. Where the <strong>ok</strong> property can be seen as true, <strong>status</strong> as 200 and <strong>statusText</strong> as &ldquo;OK&rdquo;.</p>
+<p><img src="/blogpost/6dadb363-8fa3-4420-a19e-f3e2fa3cafee.png" alt="data from request"></p>
+<p>The <strong>ok</strong> boolean is very useful when you want to validate that the request was completed successfully.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">requestUrl</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://api.github.com&#39;</span>;
+
+<span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">requestUrl</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>)
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">response</span>);
+    <span style="color:#66d9ef">else</span>
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">`The request made to </span><span style="color:#e6db74">${</span><span style="color:#a6e22e">requestUrl</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> failed`</span>);
+});
+</code></pre></div><h2 id="request-options">Request Options</h2>
+<p>The second parameter on the fetch method is the request option. Request options are settings that define the behavior of the request created by the fetch method. The most common setting is to set the request method. The request method can be set to either &ldquo;GET&rdquo;, &ldquo;POST&rdquo;, &ldquo;PUT&rdquo; or &ldquo;DELETE&rdquo;.</p>
+<p>To apply the settings to the request, just pass them to the fetch function as the second parameter.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">initalSettings</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;GET&#39;</span>
+};
+
+<span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;https://api.github.com&#39;</span>, <span style="color:#a6e22e">initalSettings</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">response</span>);
+});
+</code></pre></div><p>To apply headers to the request, we make use of the <strong>Headers</strong> type. One way to apply the headers is doing object initialization by passing the object to the Headers constructor. Another way is by using the <strong>append()</strong> method on the Headers object. To apply the headers to the request, set them on the property named &ldquo;headers&rdquo; on the request settings object.</p>
+<p>The code below shows an example of using the append method to set the &lsquo;Date&rsquo; header to the value of &lsquo;Date: Tue, 15 Nov 1994 08:12:31 GMT&rsquo;.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">headers</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Headers</span>({
+    <span style="color:#e6db74">&#34;Content-Type&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;text/plain&#34;</span>,
+    <span style="color:#e6db74">&#34;X-Custom-Header&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;myCustomHeader&#34;</span>
+});
+
+<span style="color:#a6e22e">headers</span>.<span style="color:#a6e22e">append</span>(<span style="color:#e6db74">&#39;Date&#39;</span>, <span style="color:#e6db74">&#39;Date: Tue, 15 Nov 1994 08:12:31 GMT&#39;</span>);
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">initialSettings</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">headers</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">headers</span>,
+    <span style="color:#a6e22e">method</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;GET&#39;</span>
+}
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">requestUrl</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://api.github.com&#39;</span>;
+<span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">requestUrl</span>, <span style="color:#a6e22e">initialSettings</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">response</span>);
+});
+</code></pre></div><p>The headers object comes with a lot of methods, these are the most commonly used.</p>
+<ul>
+<li>append
+<ul>
+<li>Appends a new header to the Headers object, if the header already exists it sets the value to the one passed to it.</li>
+</ul>
+</li>
+<li>delete
+<ul>
+<li>Delete a header from the Headers object.</li>
+</ul>
+</li>
+<li>get
+<ul>
+<li>Returns a string containing all the values of a specific header inside of the Headers object based on the name parameter passed into the method.</li>
+</ul>
+</li>
+<li>has
+<ul>
+<li>Returns a boolean that tells if the Headers object contains a specific header based on the header name passed into the method.</li>
+</ul>
+</li>
+</ul>
+<h2 id="chaining-promises">Chaining Promises</h2>
+<p>When the fetch method is applied, it returns a <a href="/post/promises-in-javascript" title="Link to promise post">promise</a>. Promises can be chained, therefore if a series of fetch requests need to be in a precise order this can be accomplished by using the promise returned.</p>
+<p>The example below shows how the fetch promise can be used to chain requests to a resource, where each returned promise is used for the next request.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;https://api.github.com&#39;</span>).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Response one&#39;</span>)
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">url</span>);
+}).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Response two&#39;</span>)
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">url</span>);
+}).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Response three&#39;</span>)
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">fetch</span>(<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">url</span>);
+}).<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">response</span> =&gt; {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Response four&#39;</span>);
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">response</span>);
+});
+</code></pre></div><p>The above code results in the following output being displayed in the console window.</p>
+<p><img src="/blogpost/c025258b-70cd-4b27-beab-b1b9c133431f.png" alt="Google console displaying Fetch result"></p>
+<p>The code example below shows how the fetch method and promise chains can be used to retrieve data from an external source and handled in a specific order. The code makes sure that each request was handled correctly. If it was handled correctly the next step is to turn it into json and the last step to display the data to the console.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">status</span>(<span style="color:#a6e22e">response</span>) {
+    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">ok</span>) {
+        <span style="color:#66d9ef">return</span> Promise.<span style="color:#a6e22e">resolve</span>(<span style="color:#a6e22e">response</span>);
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#66d9ef">return</span> Promise.<span style="color:#a6e22e">reject</span>(<span style="color:#66d9ef">new</span> Error(<span style="color:#e6db74">&#39;Something went wrong!&#39;</span>));
+    }
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">json</span>(<span style="color:#a6e22e">response</span>) {
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">response</span>.<span style="color:#a6e22e">json</span>();
+}
+
+<span style="color:#a6e22e">fetch</span>(<span style="color:#e6db74">&#39;https://api.github.com&#39;</span>)
+    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">status</span>)
+    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">json</span>)
+    .<span style="color:#a6e22e">then</span>(<span style="color:#a6e22e">data</span> =&gt; {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;Retrieved the following data:&#39;</span>, <span style="color:#a6e22e">data</span>)
+    }).<span style="color:#66d9ef">catch</span>(<span style="color:#a6e22e">error</span> =&gt; {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#39;The request resulted in the following error:&#39;</span>, <span style="color:#a6e22e">error</span>)
+    });
+</code></pre></div><p>The above code results in the following being displayed in the console.</p>
+<p><img src="/blogpost/06040e10-5449-4d87-82e7-f8729aae08fa.png" alt="Fetch result from chrome console containing response from github api."></p>
+<h2 id="browser-support">Browser Support</h2>
+<p>Fetch is currently supported in most modern browsers. It is therefore not necessary to bring in polyfills unless a big segment of your user base uses internet explorer or older versions of browsers, it might be a good idea to bring in a polyfill to handle the issue with browser support. You can read more about fetch polyfills here <a href="https://github.com/github/fetch" title="Github Polyfill Fetch page.">link</a>.</p>
+<p>The table below shows the browser support for fetch as of 05-06-2017.</p>
+<p><img src="/blogpost/987a3af3-2cf8-4033-98ea-4641fd93c8d7.png" alt="Diagram over the basic support for fetch."></p>
+   
+    </div>
+</div>
+
+		<footer class="footer">
+</footer>
+	
+	</div>
+</body>
+</html>

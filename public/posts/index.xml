@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Rune Nielsen | Freelance Software Developer</title>
+    <link>https://runenielsen.com/posts/</link>
+    <description>Recent content in Posts on Rune Nielsen | Freelance Software Developer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 05 Jun 2017 16:26:19 +0200</lastBuildDate>
+    
+	<atom:link href="https://runenielsen.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Introduction to Fetch in JavaScript</title>
+      <link>https://runenielsen.com/posts/introduction-to-fetch-in-javascript/</link>
+      <pubDate>Mon, 05 Jun 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/introduction-to-fetch-in-javascript/</guid>
+      <description>Introduction to Fetch in JavaScript Instead of using the good old XMLHttp Request Object in JavaScript. ES6 introduces the concept of Fetch. Fetch provides a cleaner interface for retrieving resources from both internal, but also external sources. The interface will seem familiar to the XMLHttpRequest, but Fetch has both a more powerful and flexible feature set.
+Fetch in its simplest form is a method on the global object that takes in a string.</description>
+    </item>
+    
+    <item>
+      <title>Generators in JavaScript</title>
+      <link>https://runenielsen.com/posts/generators-in-javascript/</link>
+      <pubDate>Mon, 29 May 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/generators-in-javascript/</guid>
+      <description>Generators in JavaScript A generator in JavaScript is a function that can be entered and exited that saves its current state across multiple re-enterings of the function. In this blog post, I will go over how to create a generator and how to use it. In the end of the post, I will show a use-case where a generator function can be applied.
+Creating a generator is simple. Create a function and append the &amp;lsquo;*&amp;rsquo; symbol next to the function declaration.</description>
+    </item>
+    
+    <item>
+      <title>Promises in JavaScript</title>
+      <link>https://runenielsen.com/posts/promises-in-javascript/</link>
+      <pubDate>Mon, 22 May 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/promises-in-javascript/</guid>
+      <description>Promises in JavaScript In JavaScript, the most common way to retrieve data is by calling an API. Calling an API is in most cases done asynchronously to create the best user experience and making it possible to call multiple APIs at the same time.
+The standard way to call an API asynchronous is by using function callbacks. The problem with the function callback is that it is likely to introduce big nested callback chains that can be hard to debug and maintain.</description>
+    </item>
+    
+    <item>
+      <title>Array methods in JavaScript</title>
+      <link>https://runenielsen.com/posts/array-methods-in-javascript/</link>
+      <pubDate>Mon, 15 May 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/array-methods-in-javascript/</guid>
+      <description>Array methods in JavaScript Working with collections are a daily task, as a programmer. JavaScript uses the Array** type **as the main type of collection. In this blog post, I will go over the methods on the array that I find most useful. Hopefully, the introduction to the methods will increase your productivity, working with collections and increasing the readability and maintainability of your JavaScript code.
+Filter The filter() method creates a new array containing only the values, that pass the test of the function, passed as an argument to the filter method.</description>
+    </item>
+    
+    <item>
+      <title>JavaScript closure</title>
+      <link>https://runenielsen.com/posts/javascript-closure/</link>
+      <pubDate>Mon, 08 May 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/javascript-closure/</guid>
+      <description>JavaScript closure Closure in JavaScript is when a function is able to remember and access its lexical scope, even when that function is execution outside its lexical scope.
+In JavaScript when a function is nested inside of another function, the inner function has access to the outer function scope. The innermost function has access to all the parent scopes and therefore has closure over all of them. Because the inner function has closure over the parent functions, it is able to use the variables, even when the function has returned.</description>
+    </item>
+    
+    <item>
+      <title>JavaScript lexical scope</title>
+      <link>https://runenielsen.com/posts/javascript-lexical-scope/</link>
+      <pubDate>Mon, 01 May 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/javascript-lexical-scope/</guid>
+      <description>Javascript lexical scope In this blog post, I will explain how the lexical scoping model is defined and how it is being used in JavaScript. I will go over how the lexical scope differs from the dynamic scoping model by using the example of the how the execution of a JavaScript program would look like if it was using the dynamic scoping model and after that showing how it is done in JavaScript using the lexical scoping model.</description>
+    </item>
+    
+    <item>
+      <title>JavaScript understanding scope</title>
+      <link>https://runenielsen.com/posts/javascript-understanding-scope/</link>
+      <pubDate>Fri, 14 Apr 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/javascript-understanding-scope/</guid>
+      <description>JavaScript understanding scope To efficiently program in javascript you will have to understand the principle of scope. The javascript scope is the set of variables you have access to, this goes for both objects and functions since in javascript functions and objects are also variables. To better understand scope we will have to look into how javascript is being executed.
+In javascript, there are three main actors in the execution, engine, compiler and scope.</description>
+    </item>
+    
+    <item>
+      <title>IOC Container Service Lifetimes in ASP.NET Core</title>
+      <link>https://runenielsen.com/posts/ioc-container-service-lifetimes-in-aspnetcore/</link>
+      <pubDate>Sat, 01 Apr 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/ioc-container-service-lifetimes-in-aspnetcore/</guid>
+      <description>IOC Container Service Lifetimes in ASP.NET Core ASP.NET Core is designed to support and leverage dependency injection and therefore comes with a built-in inversion of control container (IOC container). If you&amp;rsquo;re new to IOC containers you can read my introduction here link.
+When you&amp;rsquo;re building a web application it is important to be able to control the service lifetime of the registrations in your container. The reason is that some of your objects might require being instantiated on every request while another instance should be unique and should only be instantiated once in the application lifespan.</description>
+    </item>
+    
+    <item>
+      <title>Hoisting in JavaScript</title>
+      <link>https://runenielsen.com/posts/hoisting-in-javascript/</link>
+      <pubDate>Thu, 23 Mar 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/hoisting-in-javascript/</guid>
+      <description>Hoisting in JavaScript In JavaScript, a variable can be declared after it has been used. In other words, a variable can be used before it has been declared, this is called hoisting. The term hoisting cannot be found in the official JavaScript documents, but the term was invented as a general way of thinking about what happens in the compilation phase when variables and function declarations are &amp;ldquo;moved&amp;rdquo; to the top of their containing scope.</description>
+    </item>
+    
+    <item>
+      <title>What is &#39;this&#39; in JavaScript</title>
+      <link>https://runenielsen.com/posts/what-is-this-in-javascript/</link>
+      <pubDate>Thu, 23 Mar 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/what-is-this-in-javascript/</guid>
+      <description>What is &amp;lsquo;this&amp;rsquo; in JavaScript If you&amp;rsquo;re like me coming from a strictly typed language like Java or C#, you will most likely get confused very fast going into JavaScript using the &amp;lsquo;this&amp;rsquo; keyword.
+In a language like C# &amp;lsquo;this&amp;rsquo; always points to the containing class, so starting programming in JavaScript you might think that &amp;lsquo;this&amp;rsquo; always points to the containing function. Sometimes you will find &amp;ldquo;this&amp;rdquo; actually pointing to the containing function, but other times you will find it pointing to the global object or even to something third.</description>
+    </item>
+    
+    <item>
+      <title>Webpack 2 handling Sass</title>
+      <link>https://runenielsen.com/posts/webpack-2-handling-sass/</link>
+      <pubDate>Sat, 04 Mar 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/webpack-2-handling-sass/</guid>
+      <description>Webpack 2 handling Sass In this post, I will introduce how to use Webpack 2 to work with Sass files using loaders to bundle, minify, transpile and automatically add vendors specific CSS to the final bundle. If you&amp;rsquo;re new to webpack you should read this post link which contains an introduction to webpack.
+To get started you should have a project with the following files.
+package.json
+{ &amp;#34;name&amp;#34;: &amp;#34;webpack-introduction&amp;#34;, &amp;#34;version&amp;#34;: &amp;#34;1.</description>
+    </item>
+    
+    <item>
+      <title>Webpack 2 bundling using Babel</title>
+      <link>https://runenielsen.com/posts/webpack-2-bundling-using-babel/</link>
+      <pubDate>Sun, 05 Feb 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/webpack-2-bundling-using-babel/</guid>
+      <description>Webpack 2 bundling using Babel In my previous blog post, I introduced Webpack 2 and showed how to set up bundling for JavaScript link. In this blog post I will show you how to add loaders to Webpack, so you can transpile ES5 and beyond to JavaScript so you can get the benefits of the new syntax without having to worry about browser support.
+Project structure I&amp;rsquo;ve created a simple project with the following files:</description>
+    </item>
+    
+    <item>
+      <title>Webpack 2 bundling JavaScript</title>
+      <link>https://runenielsen.com/posts/webpack-2-bundling-javascript/</link>
+      <pubDate>Mon, 30 Jan 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/webpack-2-bundling-javascript/</guid>
+      <description>Webpack 2 bundling JavaScript JavaScript heavy websites are becoming more and more common. To reduce the number of HTTP requests and solve the problems with which order scripts should be loaded, tools like Webpack has emerged. In this post, I will show you how to setup Webpack 2 and use it to bundle JavaScript files. To follow the guide you should have node package manager installed and have a basic understanding of modules in JavaScript.</description>
+    </item>
+    
+    <item>
+      <title>Response Caching in ASP.NET Core</title>
+      <link>https://runenielsen.com/posts/response-caching-in-aspnetcore/</link>
+      <pubDate>Tue, 17 Jan 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/response-caching-in-aspnetcore/</guid>
+      <description>Response Caching in ASP.NET Core Using caching is an essential way to improve performance in your application. With ASP.NET Core you have to download and setup the associated middlewares. In this blog post, I will introduce you to response caching and show how to implement it in a web application.
+What is response caching Response caching is a way to add cache headers to an HTTP response. The cache headers tell the browser how long it should cache each response and thereby reduce the load on the server and provide faster response time to the users.</description>
+    </item>
+    
+    <item>
+      <title>Cookie Based Authentication in ASP.NET Core</title>
+      <link>https://runenielsen.com/posts/cookie-based-authentication-in-aspnetcore/</link>
+      <pubDate>Thu, 12 Jan 2017 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/cookie-based-authentication-in-aspnetcore/</guid>
+      <description>Cookie based authentication in ASP.NET Core ASP.NET Core comes with a cookie middleware system that can be used without ASP.NET Core Identity. Cookie authentication lets you provide your own database and login implementation.
+Cookie authentication works by creating a user principal and serialize it into an encrypted cookie. Then on request ASP.NET validates the cookie and recreates the principal and assigns it to the HttpContext.
+This post will go over the implementation of cookie based authentication in ASP.</description>
+    </item>
+    
+    <item>
+      <title>Loading Documents in RavenDB</title>
+      <link>https://runenielsen.com/posts/loading-documents-in-ravendb/</link>
+      <pubDate>Sun, 18 Sep 2016 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/loading-documents-in-ravendb/</guid>
+      <description>Loading Documents in RavenDB This blog post will address RavenDB. I will show how to retrieve and query documents and then review some technical details about the underlying framework which takes advantage of RavenDB.
+I will give a short introduction to the session object that is used to load the documents and how to override the default settings of RavenDB document store.
+If you’re new to RavenDB you can read my previous blog post, it is a short introduction to RavenDB.</description>
+    </item>
+    
+    <item>
+      <title>Routing in ASP.NET Core</title>
+      <link>https://runenielsen.com/posts/routing-in-aspnet-core/</link>
+      <pubDate>Fri, 09 Sep 2016 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/routing-in-aspnet-core/</guid>
+      <description>ASP.NET Core is starting to be a good choice for new web projects. In this post, I will show you how to make a simple route in an empty ASP.NET Core application.
+Start by creating a new solution as shown below, so choose “Web” and pick the ASP.NET Core Web Application (.NET Framework).
+When your solution is ready, go to the project.json file, it is the file where all your project dependencies will be in.</description>
+    </item>
+    
+    <item>
+      <title>Entityframework Code First</title>
+      <link>https://runenielsen.com/posts/entityframework-code-first/</link>
+      <pubDate>Tue, 06 Sep 2016 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/entityframework-code-first/</guid>
+      <description>Entityframework Code First In this blog post, I will talk about Entity Framework Code First. I expect that you have a basic understanding of Entity Framework, what it is, and how it works. I will talk about best practice and why we should use Entity Framework Code First. First, I will show an example of a code first implementation.
+Example I’ve created a clean ASP.NET MVC (4.61) solution with Entity Framework installed (6.</description>
+    </item>
+    
+    <item>
+      <title>RavenDB an introduction</title>
+      <link>https://runenielsen.com/posts/raven-db-an-introduction/</link>
+      <pubDate>Fri, 26 Aug 2016 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/raven-db-an-introduction/</guid>
+      <description>RavenDB an introduction RavenDB is a good choice for .NET developers that want to use a document database. RavenDB comes with a great library for development in .NET with C#. The library can be downloaded with NuGet package manager.
+In this blog post, I will make a small introduction to document based database systems. I will talk about the benefits that RavenDB has over other database systems. In the last section of the blog, I will guide you through a simple console application using RavenDB, and talk about some of the overall concepts you need to know to start working with RavenDB.</description>
+    </item>
+    
+    <item>
+      <title>Using Gulp with ASP.NET Core 1.0</title>
+      <link>https://runenielsen.com/posts/using-gulp-with-aspnetcore-1-0/</link>
+      <pubDate>Mon, 01 Aug 2016 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/using-gulp-with-aspnetcore-1-0/</guid>
+      <description>Using Gulp with ASP.NET Core 1.0 With the release of ASP.NET Core 1.0, Microsoft encourages developers to use task runners like Gulp and Grunt. In this blog, I will go over the basic to get started setting up Gulp for an ASP.NET Core application.
+Quick introduction to Gulp Gulp is a task runner tool that is built on Node.js with the use of the JavaScript language. It is used for automating tasks such as minification, copying of JavaScript/CSS files, static images and so on.</description>
+    </item>
+    
+    <item>
+      <title>Creating APIs in ASP.NET MVC</title>
+      <link>https://runenielsen.com/posts/creating-apis-in-asp-net-mvc/</link>
+      <pubDate>Sun, 10 Jul 2016 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/creating-apis-in-asp-net-mvc/</guid>
+      <description>Creating API&amp;rsquo;s in ASP.NET MVC In a modern day web application, we want to use APIs for creating responsive web applications. This is done by using async calls to the APIs and therefore reduce the number of postbacks to the server, making a better user experience and reducing the load on the web server.
+An example of using this principle is SPAs (Single Page Application). The principle behind SPAs is that all rendering is done on the client-side, so instead of the server being responsible for rendering, the clients browser is now responsible for that task.</description>
+    </item>
+    
+    <item>
+      <title>View Models in ASP.NET MVC</title>
+      <link>https://runenielsen.com/posts/view-models-in-asp-net-mvc/</link>
+      <pubDate>Sun, 03 Jul 2016 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/view-models-in-asp-net-mvc/</guid>
+      <description>View Models in ASP.NET MVC In ASP.NET MVC best practice is to use view models. A view model in ASP.NET MVC is a simple class only containing the data, that you want to display on your view. A view model can contain all from static text to input values like an assortment of countries for a drop-down menu.
+Let’s say that we have an Employee class and it contains the following properties.</description>
+    </item>
+    
+    <item>
+      <title>Inversion of Control Container</title>
+      <link>https://runenielsen.com/posts/inversion-of-control-container/</link>
+      <pubDate>Sun, 26 Jun 2016 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/inversion-of-control-container/</guid>
+      <description>Inversion of Control Container To get straight to the facts, we use an IoC container because it help us to decouple our classes and make our life easier when it comes to unit testing. An IoC container is in most cases a framework that will help you manage your classes/objects, this includes creation, destruction, managing the lifetime of the objects and dependencies.
+So the basic idea behind inversion of control is that, instead of making your application tightly coupled by letting your classes new up their dependencies, you instead pass in dependencies during class construction and the IoC container framework will take care of the creation of the object and not the classes themselves.</description>
+    </item>
+    
+    <item>
+      <title>AutoMapper The Basics</title>
+      <link>https://runenielsen.com/posts/automapper-the-basics/</link>
+      <pubDate>Mon, 06 Jun 2016 16:26:19 +0200</pubDate>
+      
+      <guid>https://runenielsen.com/posts/automapper-the-basics/</guid>
+      <description>AutoMapper the basics AutoMapper is a library for the .NET platform, which has the task of mapping an object to another. The usefulness comes when working with views or APIs where data must be presented or sent. In the provided cases, one uses view models for view rendering, or data transfer objects when working with APIs.
+The usefulness of a mapping framework lies in that you without it would end up with many manual mappings.</description>
+    </item>
+    
+  </channel>
+</rss>

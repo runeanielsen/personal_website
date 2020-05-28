@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>JavaScript understanding scope</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="To efficiently program in javascript you will have to understand the principle of scope. The javascript scope is the set of variables you have access to, this goes for both objects and functions since in javascript functions and objects are also variables. To better understand scope we will have to look into how javascript is being executed. By taking a look at the compiler, engine and the scope.">
+	<meta property="article:published_time" content="17-07-2017 00:00:00">
+
+	<link async href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700" rel="stylesheet"> 
+	<link async rel="stylesheet" href="/css/main.css" type="text/css" />
+	<link async rel="icon" href="/favicon.ico">
+
+	<script async src="https://kit.fontawesome.com/0d71694d01.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="grid-container">
+		<header class="header">
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" href="/">
+                <h1 class="header-item__title">Rune Nielsen | Freelance Software Developer</h1>
+            </a>
+        </div>     
+    </div>
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://github.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-github-square"></i>
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://twitter.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-twitter-square"></i> 
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://linkedin.com/in/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-linkedin"></i>
+                </p> 
+            </a>
+        </div>    
+    </div>
+</header>
+
+		
+<div class="blog-post">
+    <div class="blog-post__content">
+        <h1 id="javascript-understanding-scope">JavaScript understanding scope</h1>
+<p>To efficiently program in javascript you will have to understand the principle of scope. The javascript scope is the set of variables you have access to, this goes for both objects and functions since in javascript functions and objects are also variables. To better understand scope we will have to look into how javascript is being executed.</p>
+<p>In javascript, there are three main actors in the execution, engine, compiler and scope.</p>
+<ul>
+<li>The engine is responsible for the compilation and execution of our program.</li>
+<li>The compiler handles all the parsing and code generation.</li>
+<li>Scope collects and maintains a look-up list of all declared variables, and enforces the rules of how they can be accessed.</li>
+</ul>
+<p>If we take a look at the following code, we would think of it as a single statement.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+</code></pre></div><p>The engine does not see it as a single statement, but as two statements which it will find using lexing, a technique to split statements up into tokens. The first statement is &ldquo;var a&rdquo; and will be handled by the compiler doing the compilation phase and the other statement &ldquo;a = 10&rdquo; will be handled by the engine doing the execution phase.</p>
+<p>In the compilation phase, the compiler sees the variable declaration of &ldquo;a&rdquo; and then asks the current scope collection if the variable &ldquo;a&rdquo; already has been declared in the current scope. If it has already been declared the compiler ignores the declaration and moves on. If it has not been declared the compiler &ldquo;asks&rdquo; the scope to declare a variable named &ldquo;a&rdquo; in the current scope collection.</p>
+<p>When the compilation phase is completed the engine takes over and sees the assignment declaration of &ldquo;a = 10&rdquo;. It then asks the current scope if it has a variable declaration named &ldquo;a&rdquo; in the current scope collection if it has, it assigns the value if not it &ldquo;bubbles&rdquo; up and looks in the next outer scope until it either finds it or it does not. If it does not find it, it will either throw an error or create the variable for you depending on if the program is in strict mode or not.</p>
+<h2 id="nested-scope">Nested Scope</h2>
+<p>In javascript scopes are nested, just like functions can be nested inside of other functions. As described earlier if a variable cannot be found in the current scope then the engine looks in the outer scope to see if that scope has the variable declared, it keeps doing this until it reaches the global scope. If the variable has not been declared and the global scope has been reached two things can happen. If in strict mode there will be thrown an error if not in strict mode a variable of the specific name will be created and assigned to the value.</p>
+<p>The following code shows an example of a nested scope. The variable &ldquo;b&rdquo; is being used inside of the function named &ldquo;foo&rdquo;. The variable &ldquo;b&rdquo; has not been declared inside of &ldquo;foo&rdquo; so engine ask the scope outside of the function if it has the variable &ldquo;b&rdquo; defined. In this case, the variable has been declared and the calculation can be completed.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">foo</span>(<span style="color:#a6e22e">a</span>) {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>);
+}
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+<span style="color:#a6e22e">foo</span>(<span style="color:#ae81ff">2</span>); <span style="color:#75715e">// outputs 4
+</span></code></pre></div><p>This code example shows a variable declaration being bound to the current scope. The function &ldquo;foo&rdquo; uses the local variable declaration of &ldquo;b&rdquo; instead of the outer declaration of &ldquo;b&rdquo; because it first &ldquo;asks&rdquo; the current scope if it has a variable declaration named &ldquo;b&rdquo; it has and therefore uses that declaration instead of trying to find it in the next outer scope.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">foo</span>(<span style="color:#a6e22e">a</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">b</span>);
+}
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+<span style="color:#a6e22e">foo</span>(<span style="color:#ae81ff">2</span>); <span style="color:#75715e">// outputs 22
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">b</span>); <span style="color:#75715e">// outputs 2
+</span></code></pre></div><h2 id="summary">Summary</h2>
+<p>The scope is the rules that determine what variables you have access to in your javascript code. It is important to remember that a statement is being split into multiple tokens using lexing that the compiler and engine will handle differently.</p>
+<p>A nested scope is a scope that is inside of another scope, just like functions can be inside of other functions. When the engine asks the scope to look for a variable it will always start from the current scope to search for the variable and if it does not find it, it will ask the outer scope if that has the variable declared it will keep doing this until it eventually finds the variable or does not find it, what happens next depends on if the program is in strict mode or not.</p>
+   
+    </div>
+</div>
+
+		<footer class="footer">
+</footer>
+	
+	</div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+	<title>JavaScript lexical scope</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="In this blog post, I will explain how the lexical scoping model is defined and how it is being used in JavaScript. I will go over how the lexical scope differs from the dynamic scoping model by using the example of the how the execution of a JavaScript program would look like if it was using the dynamic scoping model and after that showing how it is done in JavaScript using the lexical scoping model.">
+	<meta property="article:published_time" content="17-07-2017 00:00:00">
+
+	<link async href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;500;600;700" rel="stylesheet"> 
+	<link async rel="stylesheet" href="/css/main.css" type="text/css" />
+	<link async rel="icon" href="/favicon.ico">
+
+	<script async src="https://kit.fontawesome.com/0d71694d01.js" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="grid-container">
+		<header class="header">
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" href="/">
+                <h1 class="header-item__title">Rune Nielsen | Freelance Software Developer</h1>
+            </a>
+        </div>     
+    </div>
+    <div class="header-collection">
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://github.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-github-square"></i>
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://twitter.com/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-twitter-square"></i> 
+                </p>
+            </a>
+        </div>
+        <div class="header-item">
+            <a class="header-item__link" target="_blank" href="https://linkedin.com/in/runeanielsen">
+                <p class="header-item__icon">
+                    <i class="fab fa-linkedin"></i>
+                </p> 
+            </a>
+        </div>    
+    </div>
+</header>
+
+		
+<div class="blog-post">
+    <div class="blog-post__content">
+        <h1 id="javascript-lexical-scope">Javascript lexical scope</h1>
+<p>In this blog post, I will explain how the lexical scoping model is defined and how it is being used in JavaScript. I will go over how the lexical scope differs from the dynamic scoping model by using the example of the how the execution of a JavaScript program would look like if it was using the dynamic scoping model and after that showing how it is done in JavaScript using the lexical scoping model.</p>
+<h2 id="lexical-scope">Lexical Scope</h2>
+<p>The lexical scope also called static scope defines how variables are resolved in nested functions. In JavaScript, we nest functions and therefore also nest scopes. The inner scope, therefore, has access to the parent function scope even if the parent function has returned.</p>
+<p>The lexical scope is set at the time off lexing, meaning that the lexical scope is based on where the variables and blocks of scopes are written in code, and by that enabling performance optimization.</p>
+<p>Let&rsquo;s take a look at the following code.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">foo</span>() {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">b</span>); <span style="color:#75715e">// displays 10
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>); <span style="color:#75715e">// displays 20
+</span><span style="color:#75715e"></span>
+    <span style="color:#a6e22e">baz</span>();
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">baz</span>() {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>); <span style="color:#75715e">// displays 20 
+</span><span style="color:#75715e"></span>    }
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">bar</span> () {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">b</span>); <span style="color:#75715e">// displays 10
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>); <span style="color:#75715e">// undefined
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+<span style="color:#a6e22e">foo</span>();
+<span style="color:#a6e22e">bar</span>();
+</code></pre></div><p>Because we use the lexical scoping model the variables are only available in the current function and in the parent functions.</p>
+<p>The example shows how the variables are available in the current scope and the parent scope. If we look at the function &ldquo;foo&rdquo; it has access to the variable &ldquo;a&rdquo; because it is declared inside of the current scope and it also has access to the variable &ldquo;b&rdquo; because it is defined in the parent function of &ldquo;foo&rdquo;.</p>
+<p>In contrast, the function &ldquo;bar&rdquo; does only have access to the variable &ldquo;b&rdquo; because it has been declared in the parent function, but not the variable &ldquo;a&rdquo; because it is inside of the scope of another function.</p>
+<p>If we compare this to the dynamic scoping model. The program would display the variable &ldquo;a&rdquo; inside of the function &ldquo;bar&rdquo; even though it has not been declared in the same scope or parent scope of the function. The reason for this is that the dynamic scoping model does not make the variables only accessible to the current scope or parent scope, but to all the scopes in the program.</p>
+<p>The code below shows how the same program as before would execute if it was using the dynamic scoping model.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">foo</span>() {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">b</span>); <span style="color:#75715e">// 10
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>); <span style="color:#75715e">// 20
+</span><span style="color:#75715e"></span>
+    <span style="color:#a6e22e">baz</span>();
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">baz</span>() {
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>); <span style="color:#75715e">// 20 
+</span><span style="color:#75715e"></span>    }
+}
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">bar</span> () {
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">b</span>); <span style="color:#75715e">// 10
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>); <span style="color:#75715e">// 20
+</span><span style="color:#75715e"></span>}
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+<span style="color:#a6e22e">foo</span>();
+<span style="color:#a6e22e">bar</span>();
+</code></pre></div><h2 id="lookups">Lookups</h2>
+<p>When the engine reaches a variable it does a lookup. A lookup is when the engine tries to retrieve a variable from the scope. To retrieve the variable it first looks for the variable inside of its own scope. If it finds the variable inside of the functions own scope it retrieves it, if it does not find it, it goes to the next outer function to see if it can find it there. If it finds it in either of the parent scopes it retrieves it.</p>
+<p>If it does not find the variable in either of the parent functions scope it either throws an error if the program is in &ldquo;strict mode&rdquo; or the global scope creates a new variable and returns it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">foo</span>() {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>;
+    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>); <span style="color:#75715e">// 20
+</span><span style="color:#75715e"></span>    <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">b</span>); <span style="color:#75715e">// 100
+</span><span style="color:#75715e"></span>
+    <span style="color:#a6e22e">baz</span>();
+    <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">baz</span>() {
+        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>;
+        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>); <span style="color:#75715e">// 200
+</span><span style="color:#75715e"></span>        <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">b</span>); <span style="color:#75715e">// 100
+</span><span style="color:#75715e"></span>    }
+}
+
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>;
+<span style="color:#a6e22e">foo</span>();
+<span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">a</span>); <span style="color:#75715e">// 10
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#a6e22e">b</span>); <span style="color:#75715e">// 20
+</span></code></pre></div><p>The lookup phase is highly optimized because the JavaScript engine predetermines where all the variables and function declarations are, doing the compilation phase. This is possible because the lookups can be determined by compile time.</p>
+<p>One thing to note is that if you make use of the &ldquo;eval&rdquo; function in JavaScript your code might run slower because &ldquo;eval&rdquo; can be used to cheat the lexical scoping model and therefore the compiler has to reduce performance because variables not being able to be stored for quick lookup.</p>
+<h2 id="summary">Summary</h2>
+<p>The lexical scope is the scoping model where the scope is defined by the position of the declaration of the functions. The lexical scope stands in contrast to the dynamic scope where the position of declarations has no meaning for the scope lookup.</p>
+<p>In the compile phase, the JavaScript engine performance optimizes the lookups, by looking at the declaration placements in the code.</p>
+<p>Doing runtime the engine asks the scope to find the variables in the scope by first asking the inner-most scope and going out till it either finds it or reaches the global scope.</p>
+   
+    </div>
+</div>
+
+		<footer class="footer">
+</footer>
+	
+	</div>
+</body>
+</html>
