@@ -11,7 +11,6 @@ cd public
 # Cleanup to avoid dead files
 rm -r ./blogpost ./categories ./css ./page ./posts ./tags ./index.html ./index.xml ./sitemap.xml ./favicon.ico
 
-
 # Go To Main folder
 cd ..
 
