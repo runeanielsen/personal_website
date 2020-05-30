@@ -4,8 +4,6 @@ date: 2017-06-19T16:26:19+02:00
 description: "We have all been there, a customer calls in a bug on the production environment. The first thing we do is that we go to the log files and see if we can find the error. Sadly the developer who wrote the code did not think that anything could go wrong so, so he decided not to spend the time creating a meaningful error message, after all, what could possibly go wrong?... So we end up with a generic error message which does not show the root course of the error. Luckily at Microsoft Build 2017, Microsoft introduced the Visual Studio snapshot debugger."
 ---
 
-# Visual Studio snapshot debugger
-
 We have all been there, a customer calls in a bug on the production environment. The first thing we do is that we go to the log files and see if we can find the error. Sadly the developer who wrote the code did not think that anything could go wrong so, so he decided not to spend the time creating a meaningful error message, after all, what could possibly go wrong?... So we end up with a generic error message which does not show the root course of the error.
 
 Luckily it's not the first time that someone forgot to implemented logging, and as the skilled software developer we are, we go to the development environment and see if we can reproduce the error. After a long time spent, we give up and go to the production environment to check if the bug perhaps has magically disappeared. Hopefully, it is gone so we can tell the customer how hard the bug was to track down and how we manipulated single bits to make everything work again! Sadly the bug is still there...

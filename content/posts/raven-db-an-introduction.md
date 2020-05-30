@@ -4,8 +4,6 @@ date: 2016-08-26T16:26:19+02:00
 description: "In this blog post, I will make a small introduction to document based database systems. I will talk about the benefits that RavenDB has over other database systems. In the last section of the blog, I will guide you through a simple console application using RavenDB, and talk about some of the overall concepts you need to know to start working with RavenDB. This blog post will not be a detailed guide using best practices, but rather an overall introduction to RavenDB."
 ---
 
-# RavenDB an introduction
-
 RavenDB is a good choice for .NET developers that want to use a document database. RavenDB comes with a great library for development in .NET with C#. The library can be downloaded with NuGet package manager.
 
 In this blog post, I will make a small introduction to document based database systems. I will talk about the benefits that RavenDB has over other database systems. In the last section of the blog, I will guide you through a simple console application using RavenDB, and talk about some of the overall concepts you need to know to start working with RavenDB. This blog post will not be a detailed guide using best practices, but rather an overall introduction to RavenDB.

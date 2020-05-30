@@ -4,8 +4,6 @@ date: 2017-06-26T16:26:19+02:00
 description: "Sass is a superset of CSS. The word superset implies that Sass includes all the features of CSS, but also introduces a whole new range of features and concepts that developers can benefit from. In this blog post, I will go over each of the features that Sass brings and explain the benefit of using them."
 ---
 
-# Introduction to Sass
-
 Sass is a superset of CSS. The word superset implies that Sass includes all the features of CSS, but also introduces a whole new range of features and concepts that developers can benefit from. In this blog post, I will go over some of the features that Sass brings and explain the benefit of using them.
 
 ## Preprocessing

@@ -4,8 +4,6 @@ date: 2017-05-22T16:26:19+02:00
 description: "In JavaScript, the most common way to retrieve data is though calling an API. Calling an API is in most cases done asynchronously instead of synchronously to create the best user experience and making it possible to call multiple APIs at the same time. The standard way to call an API asynchronous is by using function callbacks. The problem with the function callback is that it is likely to introduce big nested callback chains that can be hard to debug and maintain. The new and superior way to handle asynchronous code is by using promises."
 ---
 
-# Promises in JavaScript
-
 In JavaScript, the most common way to retrieve data is by calling an API. Calling an API is in most cases done asynchronously to create the best user experience and making it possible to call multiple APIs at the same time.
 
 The standard way to call an API asynchronous is by using function callbacks. The problem with the function callback is that it is likely to introduce big nested callback chains that can be hard to debug and maintain. The way to prevent the nested callbacks is by using **promises**.

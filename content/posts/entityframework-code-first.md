@@ -4,8 +4,6 @@ date: 2016-09-06T16:26:19+02:00
 description: "In this blog post, I will talk about Entity Framework Code First. I expect that you have a basic understanding of Entity Framework, what it is, and how it works. I will talk about best practice and why we should use Entity Framework Code First. First, I will show an example of a code first implementation."
 ---
 
-# Entityframework Code First
-
 In this blog post, I will talk about Entity Framework Code First. I expect that you have a basic understanding of Entity Framework, what it is, and how it works. I will talk about best practice and why we should use Entity Framework Code First. First, I will show an example of a code first implementation.
 
 ## Example

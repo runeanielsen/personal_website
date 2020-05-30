@@ -4,8 +4,6 @@ date: 2017-05-15T16:26:19+02:00
 description: "Working with collections are a daily task, as a programmer. JavaScript uses the Array as the main type of collection. In this blog post, I will go over the methods on the array that I find most useful. Hopefully, the introduction to the methods will be increasing your productivity, working with collections and increasing the readability and maintainability of your code."
 ---
 
-# Array methods in JavaScript
-
 Working with collections are a daily task, as a programmer. JavaScript uses the **Array**** type **as the main type of collection. In this blog post, I will go over the methods on the array that I find most useful. Hopefully, the introduction to the methods will increase your productivity, working with collections and increasing the readability and maintainability of your JavaScript code. 
 
 ## Filter

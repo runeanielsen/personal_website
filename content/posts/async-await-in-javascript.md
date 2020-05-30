@@ -4,8 +4,6 @@ date: 2017-06-12T16:26:19+02:00
 description: "Async/await is a way to handle asynchronous code in JavaScript. Before async/await the only options were to use callbacks and promises resulting in highly nested structures. The benefit of using async/await is that it creates a cleaner way to structure asynchronous code without having to rely on nested callbacks or confusing promise chains."
 ---
 
-# Async await in JavaScript
-
 Async/await is a way to handle asynchronous code in JavaScript. Before async/await the only options were to use callbacks and promises resulting in highly nested structures. The benefit of using async/await is that it creates a cleaner way to structure asynchronous code without having to rely on nested callbacks or confusing promise chains.
 
 To start using async/await the first step is to create a new function using the **async** prefix on the function declaration. The async keyword is used to specify that the function will contain asynchronous code that should be awaited.

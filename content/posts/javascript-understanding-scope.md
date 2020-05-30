@@ -4,8 +4,6 @@ date: 2017-04-14T16:26:19+02:00
 description: "To efficiently program in javascript you will have to understand the principle of scope. The javascript scope is the set of variables you have access to, this goes for both objects and functions since in javascript functions and objects are also variables. To better understand scope we will have to look into how javascript is being executed. By taking a look at the compiler, engine and the scope." 
 ---
 
-# JavaScript understanding scope
-
 To efficiently program in javascript you will have to understand the principle of scope. The javascript scope is the set of variables you have access to, this goes for both objects and functions since in javascript functions and objects are also variables. To better understand scope we will have to look into how javascript is being executed. 
 
 In javascript, there are three main actors in the execution, engine, compiler and scope. 

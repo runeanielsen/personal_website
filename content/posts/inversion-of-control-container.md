@@ -4,8 +4,6 @@ date: 2016-06-26T16:26:19+02:00
 description: "ASP.NET Core comes with a build in inversion of control container. In this post, I will introduce the concept of inversion of control and show how to use the build in container in ASP.NET Core to handle the dependencies of your application."
 ---
 
-# Inversion of Control Container
-
 To get straight to the facts, we use an IoC container because it help us to decouple our classes and make our life easier when it comes to unit testing. An IoC container is in most cases a framework that will help you manage your classes/objects, this includes creation, destruction, managing the lifetime of the objects and dependencies.
 
 So the basic idea behind inversion of control is that, instead of making your application tightly coupled by letting your classes new up their dependencies, you instead pass in dependencies during class construction and the IoC container framework will take care of the creation of the object and not the classes themselves.

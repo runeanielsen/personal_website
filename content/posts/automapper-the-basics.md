@@ -4,8 +4,6 @@ date: 2016-06-06T16:26:19+02:00
 description: AutoMapper is a library for the .NET platform, which has the task of mapping an object to another. The usefulness comes when working with views or APIs where data must be presented or sent. In the provided cases, one uses view models for view rendering, or data transfer objects when working with APIs.
 ---
 
-# AutoMapper the basics
-
 AutoMapper is a library for the .NET platform, which has the task of mapping an object to another. The usefulness comes when working with views or APIs where data must be presented or sent. In the provided cases, one uses view models for view rendering, or data transfer objects when working with APIs.
 
 The usefulness of a mapping framework lies in that you without it would end up with many manual mappings. Manual mappings can be both time-consuming to create, but also easily breakable in case of domain model changes.

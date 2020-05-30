@@ -4,8 +4,6 @@ date: 2017-05-01T16:26:19+02:00
 description: "In this blog post, I will explain how the lexical scoping model is defined and how it is being used in JavaScript. I will go over how the lexical scope differs from the dynamic scoping model by using the example of the how the execution of a JavaScript program would look like if it was using the dynamic scoping model and after that showing how it is done in JavaScript using the lexical scoping model."
 ---
 
-# Javascript lexical scope
-
 In this blog post, I will explain how the lexical scoping model is defined and how it is being used in JavaScript. I will go over how the lexical scope differs from the dynamic scoping model by using the example of the how the execution of a JavaScript program would look like if it was using the dynamic scoping model and after that showing how it is done in JavaScript using the lexical scoping model.
 
 ## Lexical Scope

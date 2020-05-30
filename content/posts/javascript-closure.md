@@ -4,8 +4,6 @@ date: 2017-05-08T16:26:19+02:00
 description: "In JavaScript when a function is nested inside of another function, the inner function has access to the outer function scope. The innermost function has access to all the parent scopes and therefore has closure over all of them. Because the inner function has closure over the parent functions, it is able to use the variables, even when the function has returned."
 ---
 
-# JavaScript closure
-
 Closure in JavaScript is when a function is able to remember and access its lexical scope, even when that function is execution outside its [lexical scope](/posts/javascript-lexical-scope).
 
 In JavaScript when a function is nested inside of another function, the inner function has access to the outer function scope. The innermost function has access to all the parent scopes and therefore has **closure** over all of them. Because the inner function has closure over the parent functions, it is able to use the variables, even when the function has returned. The following code shows closure in action.

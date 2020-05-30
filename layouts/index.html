@@ -11,27 +11,7 @@
     {{ end }} 
 
     {{ if .Paginator }}
-        <div class="pagination">
-            <div class="pagination-container">
-                {{ if .Paginator.HasPrev }}
-                    <a class="pagination-action" href="{{.Paginator.Prev.URL}}">
-                        <-
-                    </a>
-                {{ end }}
-
-                {{ if gt .Paginator.TotalPages 1 }}
-                    <div class="pagination-indicator">
-                        {{.Paginator.PageNumber}}/{{.Paginator.TotalPages}}
-                    </div>
-                {{ end }}
-
-                {{ if .Paginator.HasNext }}
-                    <a class="pagination-action" href="{{.Paginator.Next.URL}}">
-                        ->
-                    </a>
-                {{ end }}        
-            </div>
-        </div>
+        {{ partial "pagination" . }}
     {{ end }}
 </main>
 {{ end }}

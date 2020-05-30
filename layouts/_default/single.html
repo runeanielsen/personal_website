@@ -1,5 +1,7 @@
 {{ define "main" }}
 <div class="blog-post">
+    <h1 class="blog-post__title">{{ .Title }}</h1>
+    <p class ="blog-post__date">{{ .Date.Format "Mon, Jan 2, 2006" }}</p>
     <div class="blog-post__content">
         {{ .Content }}   
     </div>

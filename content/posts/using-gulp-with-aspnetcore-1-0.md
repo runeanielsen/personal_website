@@ -4,8 +4,6 @@ date: 2016-08-01T16:26:19+02:00
 description: "With the release of ASP.NET Core 1.0, Microsoft encourages developers to use task runners like Gulp and Grunt. In this blog, I will go over the basic to get started setting up Gulp for an ASP.NET Core application."
 ---
 
-# Using Gulp with ASP.NET Core 1.0
-
 With the release of ASP.NET Core 1.0, Microsoft encourages developers to use task runners like Gulp and Grunt. In this blog, I will go over the basic to get started setting up Gulp for an ASP.NET Core application.
 
 ## Quick introduction to Gulp

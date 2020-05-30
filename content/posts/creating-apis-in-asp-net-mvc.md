@@ -4,8 +4,6 @@ date: 2016-07-10T16:26:19+02:00
 description: "In a modern day web application, we want to use APIs for creating responsive web applications. This is done by using async calls to the APIs and therefore reduce the number of postbacks to the server, making a better user experience and reducing the load on the web server."
 ---
 
-# Creating API's in ASP.NET MVC
-
 In a modern day web application, we want to use APIs for creating responsive web applications. This is done by using async calls to the APIs and therefore reduce the number of postbacks to the server, making a better user experience and reducing the load on the web server.
 
 An example of using this principle is SPAs (Single Page Application). The principle behind SPAs is that all rendering is done on the client-side, so instead of the server being responsible for rendering, the clients browser is now responsible for that task.

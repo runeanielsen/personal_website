@@ -4,8 +4,6 @@ date: 2016-07-03T16:26:19+02:00
 description: "In ASP.NET MVC best practice is to use view models. A view model in ASP.NET MVC is a simple class only containing the data, that you want to display on your view. A view model can contain all from static text to input values like a assortment of countries for a drop-down menu."
 ---
 
-# View Models in ASP.NET MVC
-
 In ASP.NET MVC best practice is to use view models. A view model in ASP.NET MVC is a simple class only containing the data, that you want to display on your view. A view model can contain all from static text to input values like an assortment of countries for a drop-down menu.
 
 Let’s say that we have an Employee class and it contains the following properties.

@@ -4,8 +4,6 @@ date: 2017-07-03T16:26:19+02:00
 description: "The concept of an inversion of control container(IOC container) is widely used in software development today. If you're new to IOC containers it can be an annoyance to get it setup correctly. The result being long hours spent with a lot of trial and error. In this blog post, I will show you have to integrate an IOC container with Umbraco CMS from start to end. Giving you a great fundament to work on."
 ---
 
-# How to setup Castle Windsor in Umbraco
-
 The concept of an [inversion of control container](/post/inversion-of-control-container "Introduction to inversion of control containers.")(IOC container) is widely used in software development today. If you're new to IOC containers it can be an annoyance to get it setup correctly. The result being long hours spent with a lot of trial and error. In this blog post, I will show you have to integrate an IOC container with [Umbraco CMS](https://umbraco.com/ "Umbraco homepage.") from start to end. Hopefully, giving you a great fundament to work on.
 
 **The blog post is structured the following way.**
@@ -419,7 +417,6 @@ namespace ConstructCode.ExampleApp.Web
 The last thing we need to do to make everything work is to remove the current implementation of IHttpControllerActivator and the current implementation of "ControllerFactory" so Castle Windsor, can do the creation of the "IHttpControllers" and "IController".
 
 ```C#
-
 private static void BootstrapContainer()
 {
     _container = new WindsorContainer();

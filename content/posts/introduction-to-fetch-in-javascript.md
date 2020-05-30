@@ -4,8 +4,6 @@ date: 2017-06-05T16:26:19+02:00
 description: "Instead of using the good old XMLHttp Request Object in JavaScript. ES6 introduce the concept of Fetch. Fetch provides a cleaner interface for retrieving resources from both internal, but also external sources. The interface will seem familiar to the XMLHttpRequest, but Fetch has both a more powerful and flexible feature set."
 ---
 
-# Introduction to Fetch in JavaScript
-
 Instead of using the good old XMLHttp Request Object in JavaScript. ES6 introduces the concept of **Fetch**. Fetch provides a cleaner interface for retrieving resources from both internal, but also external sources. The interface will seem familiar to the XMLHttpRequest, but Fetch has both a more powerful and flexible feature set.
 
 Fetch in its simplest form is a method on the global object that takes in a string. The string should contain the path to the resource, that is to be retrieved.

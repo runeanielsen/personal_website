@@ -4,8 +4,6 @@ date: 2017-05-29T16:26:19+02:00
 description: "ES6 came with a new type of function called a generator. A generator in JavaScript is a function that can be entered and exited that saves its current state across multiple re-enterings of the function. In this blog post, I will go over how to create a generator and how to use it. In the end of the post, I will show a use-case where a generator function can be applied."
 ---
 
-# Generators in JavaScript
-
 A generator in JavaScript is a function that can be entered and exited that saves its current state across multiple re-enterings of the function. In this blog post, I will go over how to create a generator and how to use it. In the end of the post, I will show a use-case where a generator function can be applied.
 
 Creating a generator is simple. Create a function and append the '*' symbol next to the function declaration.
@@ -24,7 +22,7 @@ function* myGenerator() {
 }
 ```
 
-The **yield** keyword is used as a return statement inside of the generator. Meaning that once yield is called we exit the function. In the example below, the generator function would exit with the value of the variable "index" being zero. Even though the generator function yielded the value zero, the value is now one inside of the generator function. 
+The **yield** keyword is used as a return statement inside of the generator. Meaning that once yield is called we exit the function. In the example below, the generator function would exit with the value of the variable "index" being zero. Even though the generator function yielded the value zero, the value is now one inside of the generator function.
 
 ```js
 function* myGenerator() {
@@ -34,7 +32,7 @@ function* myGenerator() {
 }
 ```
 
-To use the generator we need to call the generator function. Calling the generator function for the first time returns an **iterator object **(it is important to call the generator function the first time, or you won't be able to use the methods on it). The iterator object has three methods, **next**, **return** and **throw**. Let's take a look at the most important one, **next**.
+To use the generator we need to call the generator function. Calling the generator function for the first time returns an **iterator object**(it is important to call the generator function the first time, or you won't be able to use the methods on it). The iterator object has three methods, **next**, **return** and **throw**. Let's take a look at the most important one, **next**.
 
 ```js
 function* myGenerator() {
@@ -49,7 +47,7 @@ myIterator.return();
 myIterator.throw();
 ```
 
-## Next 
+## Next
 
 Calling the next method on the iterator object returns an object containing two properties, **value** and **done**. The value property contains the yielded value returned from the generator function.
 

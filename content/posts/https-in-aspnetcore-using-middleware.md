@@ -4,13 +4,11 @@ date: 2017-07-10T16:26:19+02:00
 description: "HTTPS is now a common practice when hosting web applications. In this blog post, I will show you how to enforce SSL in an ASP.NET Core application using only middleware."
 ---
 
-# HTTPS in ASP.NET Core using Middleware
-
 HTTPS is now a common practice when hosting web applications. In this blog post, I will show you how to enforce SSL in an ASP.NET Core application using only middleware.
 
 The blog post will be based on an empty ASP.NET Core 1.1 application created using the empty template in Visual Studio 2017.
 
-![Shows the interface for creating an Empty ASP.NET Core solution](/images/blogpost/9dcea12d-8ffd-438a-9c78-5f04a789b457.png)
+![Shows the interface for creating an Empty ASP.NET Core solution](/blogpost/9dcea12d-8ffd-438a-9c78-5f04a789b457.png)
 
 The following dependencies will, therefore, be installed by default.
 
