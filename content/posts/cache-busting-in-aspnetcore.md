@@ -1,7 +1,7 @@
 ---
 title: "Cache busting in ASP.NET Core"
 date: 2017-07-17T16:26:19+02:00
-description: "Caching static resources is a good way to improve the performance of your website. Instead of your server having to deliver each static resource on every request. The user's browser caches the static resources the first time that they're requested and received, and thereafter loads them from the cache on the following requests instead of requesting them from the server again. The problem with caching static resources is that the user might have cached resources that don't match the files on the server. In this post, I will show you how to implement cache busting using ASP.NET Core tag helpers."
+description: "Caching static resources is a good way to improve the performance of your website. Instead of your server having to deliver each static resource on every request. The user's browser caches the static resources the first time that they're requested and received, and thereafter loads them from the cache on the following requests instead of requesting them from the server again. In this post, I will show you how to implement cache busting using ASP.NET Core tag helpers."
 ---
 
 Caching static resources is a good way to improve the performance of your website. Instead of your server having to deliver each static resource on every request. The user's browser caches the static resources the first time that they're requested and received, and thereafter loads them from the cache on the following requests instead of requesting them from the server again. _To implement static resource caching in ASP.NET Core you can read this blog post [link](/post/response-caching-in-asp-net-core "Response caching in ASP.NET Core")._
