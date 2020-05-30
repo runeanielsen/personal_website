@@ -31,7 +31,7 @@ function myFunctionToBeAwaited() {
 
 myAsynchronousFunction();
 
-// Outputs 
+// Outputs
 // Hello World Two!
 // Hello World One!
 ```
@@ -57,7 +57,7 @@ function myFunctionToBeAwaited() {
 myAsynchronousFunction();
 
 // Outputs
-// Hello World One! 
+// Hello World One!
 // Hello World Two!
 ```
 

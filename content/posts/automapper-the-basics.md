@@ -82,7 +82,7 @@ namespace AutomapperExample
 }
 ```
 
-The “Configure” method is where we declare our mappings. To start the configuration of the mapping you need to use the “CreateMap” generic method and specify the domain model to the view model mappings and the other way around. 
+The “Configure” method is where we declare our mappings. To start the configuration of the mapping you need to use the “CreateMap” generic method and specify the domain model to the view model mappings and the other way around.
 
 ```C#
 using AutoMapper;
@@ -105,7 +105,7 @@ namespace AutomapperExample
 }
 ```
 
-If the mappings are identical you can make use of the "ReverseMap" method, which creates a map for both the view model and the domain model. 
+If the mappings are identical you can make use of the "ReverseMap" method, which creates a map for both the view model and the domain model.
 
 ```C#
 // Maps both ways
@@ -114,13 +114,13 @@ CreateMap<CreateCustomerViewModel, Customer>().ReverseMap();
 
 The way that AutoMapper works is that it finds properties with the same type and name and maps the properties that match. When you have created your mappings, you need to initialize the mappings. This is usually done in the “Global.asax” file in the root folder of your project.
 
-Here you specify the mapping profiles you want to initialize. For every mapping profile, you want to use, remember to initialize them. 
+Here you specify the mapping profiles you want to initialize. For every mapping profile, you want to use, remember to initialize them.
 
 ```C#
 using System.Web.Mvc;
 using System.Web.Routing;
 using AutoMapper;
- 
+
 namespace AutomapperExample
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -135,7 +135,7 @@ namespace AutomapperExample
 }
 ```
 
-## Using AutoMapper.
+## Using AutoMapper
 
 To use AutoMapper you want to use the static method “Map” on the Mapper class. There are different ways that you can use AutoMapper to map your objects, explained in details below.
 
@@ -157,21 +157,21 @@ var customer = Mapper.Map<Customer>(vm);
 
 ### Collection mapping with return
 
-If you want to map a collection of objects you can do it in two ways. The first way is by doing it in the Select Linq statement mapping all of them to a generic list. 
+If you want to map a collection of objects you can do it in two ways. The first way is by doing it in the Select Linq statement mapping all of them to a generic list.
 
 ```C#
 var vmCustomers = _context.Customers.ToList()
     .Select(Mapper.Map<Customer, CustomerViewModel>);
 ```
 
-Another example here mapping from an IEnumerable collection of “Customer” to an IEnumerable collection of “CustomerViewModel”. 
+Another example here mapping from an IEnumerable collection of “Customer” to an IEnumerable collection of “CustomerViewModel”.
 
 ```C#
 var vmCustomers = Mapper.Map
     <IEnumerable<Customer>, IEnumerable<CustomerViewModel>>(customers);
 ```
 
-#### So to summarize, AutoMapper is great because:
+#### So to summarize, AutoMapper is great because
 
 * AutoMapper makes it easier to map view models to domain models and the other way around.
 * If changes happen to the domain object, it is easy to change the mapping profile, and all the code using AutoMapper won’t have to change.

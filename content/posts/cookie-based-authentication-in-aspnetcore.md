@@ -19,7 +19,7 @@ Install-Package Microsoft.AspNetCore.Authentication.Cookies
 Install-Package Microsoft.AspNetCore.Mvc
 ```
 
-Download the NuGet packages and go to the "Startup.cs" file. Inside of the "Startup.cs" file, find the method named **Configure.** Add the following code to set up the middleware. <span style="text-decoration: underline;">You are not required configure the middleware exactly as shown below, you should configure it to suit your needs</span>.
+Download the NuGet packages and go to the "Startup.cs" file. Inside of the "Startup.cs" file, find the method named **Configure.** Add the following code to set up the middleware. You are not required configure the middleware exactly as shown below, you should configure it to suit your needs.
 
 ```C#
 app.UseCookieAuthentication(new CookieAuthenticationOptions()
@@ -34,13 +34,13 @@ app.UseCookieAuthentication(new CookieAuthenticationOptions()
 
 A short overview of the cookie middleware configurations used in the example above.
 
-*   **AuthenticationScheme** - defines the name of the cookie middleware instance. The name will be used when a user is logging in or logging out. 
-*   **LoginPath** - is used when a user tries to access a controller with the "Authorized" attribute and is not logged in. The path should redirect to either an error page or the login screen. 
-*   **AccessDeniedPath** - specifies what page the user should be redirected to if a user tries to access a page with user rights which do not correspond to the requirements of a specific page.
-*   **AutomaticAuthenticate** - indicate whether the cookie should be validated on each request and build a new principal.
-*   **AutomaticChallenge** - this flag indicates if the middleware should redirect the browser to the LoginPath or AccessDeniedPath on failed user authentication.
+* **AuthenticationScheme** - defines the name of the cookie middleware instance. The name will be used when a user is logging in or logging out.
+* **LoginPath** - is used when a user tries to access a controller with the "Authorized" attribute and is not logged in. The path should redirect to either an error page or the login screen.
+* **AccessDeniedPath** - specifies what page the user should be redirected to if a user tries to access a page with user rights which do not correspond to the requirements of a specific page.
+* **AutomaticAuthenticate** - indicate whether the cookie should be validated on each request and build a new principal.
+* **AutomaticChallenge** - this flag indicates if the middleware should redirect the browser to the LoginPath or AccessDeniedPath on failed user authentication.
 
-If you want to follow along add the code below to the **ConfigureServices** method inside of the "Startup.cs" file. <span style="text-decoration: underline;">Note that the configurations below are not required to make cookie authentication work.</span>
+If you want to follow along add the code below to the **ConfigureServices** method inside of the "Startup.cs" file. Note that the configurations below are not required to make cookie authentication work.
 
 ```C#
 services.AddMvc();
@@ -106,17 +106,17 @@ In the above case, we created an API implementation of login and logout function
 
 To validate that the cookie is being set, navigate to "http://localhost:{your port}/Login/Login". Inside of chrome dev tools under "Application", "Storage" and then to "Cookies", you should now see that the authentication cookie has been assigned.
 
-![](/blogpost/2caa19e4-b248-4196-bd6e-b6b9fc885c10.png)
+![authentication cookie set](/blogpost/2caa19e4-b248-4196-bd6e-b6b9fc885c10.png)
 
 Next, is to validate that the "Logout" functionality works. Go to "http://localhost:{your port}/Login/Logout" and once again navigate to the Chrome dev tools and look under "Cookies", if everything works as expected the cookie should now be removed.
 
-![](/blogpost/b28c0529-1d27-41bc-9203-cbbbafa846fc.png)
+![shows that the cookie has been removed](/blogpost/b28c0529-1d27-41bc-9203-cbbbafa846fc.png)
 
 ## Using authentication on controllers
 
 To limit a controller to only be accessible to logged in users, you can use the "Authorize" attribute. If the user is not authorized the user will be redirected to the page you specified in the cookie authentication middleware configuration in the "Startup.cs" file.
 
-The attribute can be added to the controller or to a specific method. If you want to only authorize the controller or method to a user with a specific role, you can specify the roles inside the authorize attribute. 
+The attribute can be added to the controller or to a specific method. If you want to only authorize the controller or method to a user with a specific role, you can specify the roles inside the authorize attribute.
 
 ```C#
 using Microsoft.AspNetCore.Authorization;
