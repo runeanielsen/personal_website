@@ -8,20 +8,19 @@ The concept of an [inversion of control container](/post/inversion-of-control-co
 
 **The blog post is structured the following way.**
 
-1.  Installing Castle Windsor
-2.  Overwriting Umbraco Global.asax
-3.  Folder Structure 
-4.  Installers
-
-    1.  Extending IWindsorContainer
-    2.  Extending FromDescriptor
-    3.  Umbraco Installer
-    4.  Controller Installer
-    5.  Site Installer
-    6.  Service installer
-5.  Controller factory
-6.  Setting up IHttpControllerActivator
-7.  Bootstrap Castle Windsor
+1. Installing Castle Windsor
+2. Overwriting Umbraco Global.asax
+3. Folder Structure
+4. Installers
+  1. Extending IWindsorContainer
+  2. Extending FromDescriptor
+  3. Umbraco Installer
+  4. Controller Installer
+  5. Site Installer
+  6. Service installer
+5. Controller factory
+6. Setting up IHttpControllerActivator
+7. Bootstrap Castle Windsor
 
 ## Installing Castle Windsor
 
@@ -57,7 +56,6 @@ namespace ConstructCode.ExampleApp.Web
 
 To get our IOC container up and running we need to override two methods "OnApplicationStarted" and "OnApplicationEnd:. To make sure everything Umbraco needs to do on startup, we will keep the call to the base implementation.
 
-
 ```C#
 using System;
 using Umbraco.Web;
@@ -79,7 +77,7 @@ namespace ConstructCode.ExampleApp.Web
 }
 ```
 
-Right now the code in our startup file is not being executed. The reason is that we haven't told our application to use the new "Startup" class that we created. To do that, go to the "Global.asax" and change the value of the attribute named "Inherit" to point to the correct namespace with the file inside. 
+Right now the code in our startup file is not being executed. The reason is that we haven't told our application to use the new "Startup" class that we created. To do that, go to the "Global.asax" and change the value of the attribute named "Inherit" to point to the correct namespace with the file inside.
 
 ```C#
 <%@ Application Inherits="ConstructCode.ExampleApp.Web.Startup" Language="C#" %>
@@ -91,9 +89,9 @@ To have a consistent structure for our application we will be using the followin
 
 ![Castle Windsor configuration folder structure.](/blogpost/d4a01a3b-0167-44d7-8ed3-7745b6580994.png)
 
-*   The "**Extensions**" folder will hold all the classes on Windsor that we extend.
-*   The "**Installers**" folder we consist of all our installers, meaning all the classes that inherit from "IWindsorInstaller".
-*   The "**Ioc**" folder we consist of all our inversion of control factory logic.
+* The "**Extensions**" folder will hold all the classes on Windsor that we extend.
+* The "**Installers**" folder we consist of all our installers, meaning all the classes that inherit from "IWindsorInstaller".
+* The "**Ioc**" folder we consist of all our inversion of control factory logic.
 
 ## Installers
 

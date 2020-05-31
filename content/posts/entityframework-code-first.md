@@ -41,7 +41,7 @@ namespace EfCodeFirstExample.Models
     public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext() : base ("DefaultConnectionString")
-        { 
+        {
         }
     }
 }
@@ -79,7 +79,7 @@ public class Store
         public ICollection<Product> Products { get; set; }
 }
 ```
-    
+
 When the models are created we need to go back to the “ApplicationDbContext” class and add the following lines.
 
 ```C#
@@ -122,12 +122,12 @@ internal sealed class Configuration : DbMigrationsConfiguration<EfCodeFirstExamp
 
 **To summarize, we have:**
 
-1.  Added Entity Framework to the solution
-2.  Created a database context class
-3.  Added a connection string to the web.config
-4.  Created the needed models
-5.  Added the models to the DbSet
-6.  Enabled migrations
+1. Added Entity Framework to the solution
+2. Created a database context class
+3. Added a connection string to the web.config
+4. Created the needed models
+5. Added the models to the DbSet
+6. Enabled migrations
 
 Next step is now to run the migration. To run the migration, you open up NuGet package manager console and type: “add-migration” and give it a name, it will ask for a name after you type “add-migration” and press enter. Another way is to type “add-migration name” and insert the name of the migration on the name position.
 
@@ -258,11 +258,11 @@ Data annotations can be used by Entity Framework, to manage how the tables in th
 
 Here is an example of two other very commonly used data annotation attributes.
 
-*   [Required]
-*   Used to say that the column is not a nullable type
-*   All not nullable types like int and double will be set to be required by default. To deal with that problem make the types nullable by adding ? to the end of the type declaration as following: int? variable;
-*   [MaxLength(50)]
-*   By using this attribute you can specify the max length that the column can contain, if nothing is specified on your string data types then it will me MAX by default.
+* [Required]
+* Used to say that the column is not a nullable type
+* All not nullable types like int and double will be set to be required by default. To deal with that problem make the types nullable by adding ? to the end of the type declaration as following: int? variable;
+* [MaxLength(50)]
+* By using this attribute you can specify the max length that the column can contain, if nothing is specified on your string data types then it will me MAX by default.
 
 So let's try to use them, so go to the Product class and put the [Required] attribute over the Name property and the [MaxLength()] property over it and set it to 50.
 
