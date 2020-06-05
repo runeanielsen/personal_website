@@ -17,7 +17,6 @@ cd ..
 # Build the project.
 hugo --gc --minify # if using a theme, replace with `hugo -t <YOURTHEME>`
 
-
 # Go To Public folder
 cd public
 
