@@ -1,0 +1,36 @@
+version: 2.1
+
+executors:
+  cimg-base:
+    docker:
+      - image: cimg/base:2020.09
+jobs:
+  build-upload:
+    executor: cimg-base
+    steps:
+      - checkout
+      - add_ssh_keys:
+          fingerprints:
+            - "57:e3:35:08:f3:d7:70:73:f1:07:d3:6c:26:eb:af:48"
+      - run:
+          name: key-scan
+          command: ssh-keyscan github.com >> ~/.ssh/known_hosts
+      - run:
+          name: update
+          command: sudo apt-get update
+      - run:
+          name: install hugo
+          command: sudo apt-get install hugo
+      - run:
+          name: git clone destination repo
+          command: git clone git@github.com:DAXGRID/open-ftth-chart.git
+      - run:
+          name: run deploy script
+          command: ./deploy.sh
+workflows:
+  build-upload:
+    jobs:
+      - build-upload:
+          filters:
+            tags:
+              only: /.*/
