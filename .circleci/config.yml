@@ -11,7 +11,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "57:e3:35:08:f3:d7:70:73:f1:07:d3:6c:26:eb:af:48"
+            - "26:6b:63:f1:64:84:8f:ee:b1:b4:7c:c5:41:85:9d:84"
       - run:
           name: key-scan
           command: ssh-keyscan github.com >> ~/.ssh/known_hosts
@@ -23,7 +23,7 @@ jobs:
           command: sudo apt-get install hugo
       - run:
           name: git clone destination repo
-          command: git clone git@github.com:DAXGRID/open-ftth-chart.git
+          command: git clone git@github.com:runeanielsen/runeanielsen.github.io.git
       - run:
           name: run deploy script
           command: ./deploy.sh
