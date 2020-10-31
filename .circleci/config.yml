@@ -23,7 +23,7 @@ jobs:
           command: sudo apt-get install hugo
       - run:
           name: git clone destination repo
-          command: git clone git@github.com:runeanielsen/runeanielsen.github.io.git
+          command: git clone --recurse-submodules -j8 git@github.com:runeanielsen/personal_website.git
       - run:
           name: run deploy script
           command: |
