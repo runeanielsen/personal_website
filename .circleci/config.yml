@@ -27,8 +27,8 @@ jobs:
       - run:
           name: run deploy script
           command: |
-             git config user.email "runenielsen@runbox.com"
-             git config user.name "runeanielsen"
+             git config --global user.email "runenielsen@runbox.com"
+             git config --global user.name "runeanielsen"
              ./deploy.sh
 workflows:
   build-upload:
