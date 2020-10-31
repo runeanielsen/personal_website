@@ -26,7 +26,10 @@ jobs:
           command: git clone git@github.com:runeanielsen/runeanielsen.github.io.git
       - run:
           name: run deploy script
-          command: ./deploy.sh
+          command: |
+             git config user.email "runenielsen@runbox.com"
+             git config user.name "runeanielsen"
+             ./deploy.sh
 workflows:
   build-upload:
     jobs:
