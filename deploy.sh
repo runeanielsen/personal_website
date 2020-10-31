@@ -9,7 +9,7 @@ printf "\033[0;32mDeploying updates to GitHub...\033[0m\n"
 cd ./runeanielsen.github.io
 
 # Cleanup to avoid dead files
-rm -r ./blogpost ./categories ./css ./page ./posts ./tags ./index.html ./index.xml ./sitemap.xml ./favicon.ico || exit 3
+# rm -r ./blogpost ./categories ./css ./page ./posts ./tags ./index.html ./index.xml ./sitemap.xml ./favicon.ico
 
 # Go To Main folder
 cd ..
