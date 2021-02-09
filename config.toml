@@ -4,7 +4,7 @@ languageCode = "en-us"
 title = "Rune Nielsen | Freelance Software Developer"
 
 [params]
-description = "Rune Nielsen Freelance Software Developer"
-github = "https://github.com/runeanielsen"
-linkedin = "https://linkedin.com/in/runeanielsen"
-twitter = ""
+    description = "Rune Nielsen Freelance Software Developer"
+    github = "https://github.com/runeanielsen"
+    linkedin = "https://linkedin.com/in/runeanielsen"
+    twitter = ""
