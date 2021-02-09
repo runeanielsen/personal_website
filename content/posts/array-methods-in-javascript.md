@@ -218,7 +218,7 @@ const specificCustomer = customers.find(function(customer) {
 console.log(specificCustomer); // { name: 'Jonas', city: 'Copenhagen' }
 ```
 
-In the following piece of code, the find method is used to query a collection based on a property and a query value.
+In the following piece of code, the find method is used to query a collection based on a property and a query variable.
 
 ```js
 const customers = [
