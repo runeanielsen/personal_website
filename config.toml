@@ -1,9 +1,9 @@
 theme = "modest"
 baseURL = "https://runenielsen.com/"
 languageCode = "en-us"
-title = "Rune Nielsen | Freelance Software Developer"
+title = "Homepage | Rune Nielsen"
 
 [params]
-    description = "Rune Nielsen Freelance Software Developer"
+    description = "Rune Nielsen"
     github = "https://github.com/runeanielsen"
     linkedin = "https://linkedin.com/in/runeanielsen"
